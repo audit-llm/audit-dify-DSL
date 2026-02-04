@@ -1,0 +1,560 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 工作方案-政策依据
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/ollama:0.1.2@1312dc6fbd53ce097f57dc9f6ca21212f7e0d99461f730020d5bc558e9fe7bc6
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1763730563900-source-1763731906240-target
+      source: '1763730563900'
+      sourceHandle: source
+      target: '1763731906240'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1763735266277-source-1763735280269-target
+      source: '1763735266277'
+      sourceHandle: source
+      target: '1763735280269'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1763731906240-source-1763735266277-target
+      source: '1763731906240'
+      sourceHandle: source
+      target: '1763735266277'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: audit_year
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: audit_year
+      height: 89
+      id: '1763730563900'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: mysql
+          form: llm
+          human_description:
+            en_US: Used for selecting the database type, mysql, oracle, oracle11g,
+              postgresql or mssql.
+            ja_JP: Used for selecting the database type, mysql, oracle, oracle11g,
+              postgresql or mssql.
+            pt_BR: Used for selecting the database type, mysql, oracle, oracle11g,
+              postgresql or mssql.
+            zh_Hans: 用于选择数据库类型，mysql、oracle、oracle11g、postgresql或mssql。
+          label:
+            en_US: Database type
+            ja_JP: Database type
+            pt_BR: Database type
+            zh_Hans: 数据库类型
+          llm_description: ''
+          max: null
+          min: null
+          name: db_type
+          options:
+          - icon: ''
+            label:
+              en_US: MySQL
+              ja_JP: MySQL
+              pt_BR: MySQL
+              zh_Hans: MySQL
+            value: mysql
+          - icon: ''
+            label:
+              en_US: Oracle
+              ja_JP: Oracle
+              pt_BR: Oracle
+              zh_Hans: Oracle
+            value: oracle
+          - icon: ''
+            label:
+              en_US: Oracle11g
+              ja_JP: Oracle11g
+              pt_BR: Oracle11g
+              zh_Hans: Oracle11g
+            value: oracle11g
+          - icon: ''
+            label:
+              en_US: PostgreSQL
+              ja_JP: PostgreSQL
+              pt_BR: PostgreSQL
+              zh_Hans: PostgreSQL
+            value: postgresql
+          - icon: ''
+            label:
+              en_US: Microsoft SQL Server
+              ja_JP: Microsoft SQL Server
+              pt_BR: Microsoft SQL Server
+              zh_Hans: Microsoft SQL Server
+            value: mssql
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: localhost
+          form: llm
+          human_description:
+            en_US: Database hostname or IP address (Original string, not URL-encoded
+              string).
+            ja_JP: Database hostname or IP address (Original string, not URL-encoded
+              string).
+            pt_BR: Database hostname or IP address (Original string, not URL-encoded
+              string).
+            zh_Hans: 数据库的主机名或IP地址（原始字符串，非URL编码字符串）。
+          label:
+            en_US: Database Host
+            ja_JP: Database Host
+            pt_BR: Database Host
+            zh_Hans: 数据库地址
+          llm_description: ''
+          max: null
+          min: null
+          name: db_host
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Database port.
+            ja_JP: Database port.
+            pt_BR: Database port.
+            zh_Hans: 数据库的端口。
+          label:
+            en_US: Port
+            ja_JP: Port
+            pt_BR: Port
+            zh_Hans: 端口
+          llm_description: ''
+          max: null
+          min: null
+          name: db_port
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: number
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Database username (Original string, not URL-encoded string).
+            ja_JP: Database username (Original string, not URL-encoded string).
+            pt_BR: Database username (Original string, not URL-encoded string).
+            zh_Hans: 数据库的用户名（原始字符串，非URL编码字符串）。
+          label:
+            en_US: Username
+            ja_JP: Username
+            pt_BR: Username
+            zh_Hans: 用户名
+          llm_description: ''
+          max: null
+          min: null
+          name: db_username
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Database password (Original string, not URL-encoded string).
+            ja_JP: Database password (Original string, not URL-encoded string).
+            pt_BR: Database password (Original string, not URL-encoded string).
+            zh_Hans: 数据库的密码（原始字符串，非URL编码字符串）。
+          label:
+            en_US: Password
+            ja_JP: Password
+            pt_BR: Password
+            zh_Hans: 密码
+          llm_description: ''
+          max: null
+          min: null
+          name: db_password
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: secret-input
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Database name (Original string, not URL-encoded string).
+            ja_JP: Database name (Original string, not URL-encoded string).
+            pt_BR: Database name (Original string, not URL-encoded string).
+            zh_Hans: 数据库的名称（原始字符串，非URL编码字符串）。
+          label:
+            en_US: Database name
+            ja_JP: Database name
+            pt_BR: Database name
+            zh_Hans: 库名
+          llm_description: ''
+          max: null
+          min: null
+          name: db_name
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 'Database properties, for example: alt_host=host1&alt_host=host2&ssl_cipher=%2Fpath%2Fto%2Fcrt'
+            ja_JP: 'Database properties, for example: alt_host=host1&alt_host=host2&ssl_cipher=%2Fpath%2Fto%2Fcrt'
+            pt_BR: 'Database properties, for example: alt_host=host1&alt_host=host2&ssl_cipher=%2Fpath%2Fto%2Fcrt'
+            zh_Hans: 数据库属性，例如：alt_host=host1&alt_host=host2&ssl_cipher=%2Fpath%2Fto%2Fcrt
+          label:
+            en_US: Database properties
+            ja_JP: Database properties
+            pt_BR: Database properties
+            zh_Hans: 数据库属性
+          llm_description: ''
+          max: null
+          min: null
+          name: db_properties
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 'SQL query statement, for example: select * from tbl_name'
+            ja_JP: 'SQL query statement, for example: select * from tbl_name'
+            pt_BR: 'SQL query statement, for example: select * from tbl_name'
+            zh_Hans: SQL查询语句，例如：select * from tbl_name
+          label:
+            en_US: Query SQL
+            ja_JP: Query SQL
+            pt_BR: Query SQL
+            zh_Hans: SQL查询语句
+          llm_description: 'SQL query statement, for example: select * from tbl_name'
+          max: null
+          min: null
+          name: query_sql
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: markdown
+          form: form
+          human_description:
+            en_US: Used for selecting the output format, markdown or json.
+            ja_JP: Used for selecting the output format, markdown or json.
+            pt_BR: Used for selecting the output format, markdown or json.
+            zh_Hans: 用于选择输出格式，markdown或json。
+          label:
+            en_US: Output format
+            ja_JP: Output format
+            pt_BR: Output format
+            zh_Hans: 输出格式
+          llm_description: ''
+          max: null
+          min: null
+          name: output_format
+          options:
+          - icon: ''
+            label:
+              en_US: MARKDOWN
+              ja_JP: MARKDOWN
+              pt_BR: MARKDOWN
+              zh_Hans: MARKDOWN
+            value: markdown
+          - icon: ''
+            label:
+              en_US: JSON
+              ja_JP: JSON
+              pt_BR: JSON
+              zh_Hans: JSON
+            value: json
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: select
+        params:
+          db_host: ''
+          db_name: ''
+          db_password: ''
+          db_port: ''
+          db_properties: ''
+          db_type: ''
+          db_username: ''
+          output_format: ''
+          query_sql: ''
+        provider_id: junjiem/db_query/db_query
+        provider_name: junjiem/db_query/db_query
+        provider_type: builtin
+        selected: false
+        title: SQL查询
+        tool_configurations:
+          output_format:
+            type: constant
+            value: json
+        tool_description: 数据库SQL查询工具。
+        tool_label: SQL查询
+        tool_name: sql_query
+        tool_node_version: '2'
+        tool_parameters:
+          db_host:
+            type: mixed
+            value: host.docker.internal
+          db_name:
+            type: mixed
+            value: audit_flow
+          db_password:
+            type: mixed
+            value: '123456'
+          db_port:
+            type: constant
+            value: 3307
+          db_properties:
+            type: mixed
+            value: null
+          db_type:
+            type: constant
+            value: mysql
+          db_username:
+            type: mixed
+            value: root
+          query_sql:
+            type: mixed
+            value: select * from policy_documents
+        type: tool
+      height: 89
+      id: '1763731906240'
+      position:
+        x: 382.29739670999413
+        y: 282
+      positionAbsolute:
+        x: 382.29739670999413
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1763731906240'
+          - text
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+            enable_thinking: false
+          mode: chat
+          name: DeepSeek-R1-Distill-Llama-70B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: fd9955ca-f3a8-456c-bfa1-47b8ec3d833f
+          role: system
+          text: '现在，请基于以下参数生成标题和政策依据部分：
+
+            - 审计年度：{{#1763730563900.audit_year#}}
+
+            - 最新政策文件：{{#1763731906240.text#}}
+
+            生成要求：
+
+            1. 标题格式固定为"{year}年市县党政主要领导干部自然资源资产离任审计工作方案"
+
+            2. 政策依据按时间顺序引用，包含文号
+
+            3. 必须包含中央两个核心文件和湖北省两个实施文件
+
+            4. 结尾统一表述为"结合我省实际，制定如下工作方案"
+
+            5. 严格遵照{{#1763731906240.text#}}的内容，不要瞎编
+
+            6. 不要有任何markdown格式
+
+
+            参照模板：为贯彻落实《中共中央办公厅 国务院办公厅关于印发<领导干部自然资源资产离任审计规定（试行）>的通知》（厅字〔2017〕39号）、《中共中央办公厅
+            国务院办公厅印发<关于建立健全领导干部自然资源资产离任审计评价指标体系的意见>的通知》（厅字〔2022〕26号）以及《省委办公厅 省政府办公厅关于印发<湖北省领导干部自然资源资产离任审计规定（试行）>的通知》(鄂办文〔2018〕75号）、《省委办公厅
+            省政府办公厅关于建立健全湖北省领导干部自然资源资产离任审计评价指标体系的实施意见》(鄂办文〔2024〕50号）精神，做好{{#1763730563900.audit_year#}}年市县党政主要领导干部自然资源资产离任（任中）审计工作，结合我省实际，制定如下工作方案。'
+        selected: true
+        title: LLM 4
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1763735266277'
+      position:
+        x: 701.0740209315865
+        y: 282
+      positionAbsolute:
+        x: 701.0740209315865
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1763735266277.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 104
+      id: '1763735280269'
+      position:
+        x: 1053.824852476169
+        y: 273.01613465764984
+      positionAbsolute:
+        x: 1053.824852476169
+        y: 273.01613465764984
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 25.262965434457442
+      y: 138.37696055691174
+      zoom: 0.6634225702985826

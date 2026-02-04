@@ -1,0 +1,265 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 工作方案-审计目标
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/ollama:0.1.2@1312dc6fbd53ce097f57dc9f6ca21212f7e0d99461f730020d5bc558e9fe7bc6
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: 22df4047-d133-408d-bd5e-c3a4fdece41c
+    name: party_query
+    selector:
+    - env
+    - party_query
+    value: 关于自然资源生态文明建设党的会议精神
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: knowledge-retrieval
+      id: 1757644973320-source-1763461842592-target
+      source: '1757644973320'
+      sourceHandle: source
+      target: '1763461842592'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1763461842592-source-17582928874110-target
+      source: '1763461842592'
+      sourceHandle: source
+      target: '17582928874110'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17582928874110-source-1763973119507-target
+      source: '17582928874110'
+      sourceHandle: source
+      target: '1763973119507'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: description
+          max_length: 256
+          options: []
+          required: false
+          type: text-input
+          variable: description
+        - label: audit_year
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: audit_year
+      height: 115
+      id: '1757644973320'
+      position:
+        x: 409.15246903213716
+        y: 53.41933002480573
+      positionAbsolute:
+        x: 409.15246903213716
+        y: 53.41933002480573
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        dataset_ids:
+        - Ct1REzvB7Af+8a+16LwdN7R+cryWImRyBtPRtx6tcTvJ8/FX/oJtmYT5DkEOOVMg
+        desc: ''
+        metadata_filtering_mode: automatic
+        metadata_model_config:
+          completion_params:
+            temperature: 0.7
+            enable_thinking: false
+          mode: chat
+          name: DeepSeek-R1-Distill-Llama-70B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: weighted_score
+          reranking_model:
+            model: gte-rerank
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0.3
+            vector_setting:
+              embedding_model_name: bge-m3
+              embedding_provider_name: langgenius/ollama/ollama
+              vector_weight: 0.7
+        query_variable_selector:
+        - env
+        - party_query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索-关于自然资源生态文明建设党的会议精神
+        type: knowledge-retrieval
+      height: 91
+      id: '1763461842592'
+      position:
+        x: 812.1594698775444
+        y: 83.62306391908581
+      positionAbsolute:
+        x: 812.1594698775444
+        y: 83.62306391908581
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1763461842592'
+          - result
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+            enable_thinking: false
+          mode: chat
+          name: DeepSeek-R1-Distill-Llama-70B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 3051e7ff-ba27-4e17-b6d0-1d0fa91c5aca
+          role: system
+          text: "* **角色设定**\n  你是湖北省审计厅自然资源处的业务专家，负责起草市县党政主要领导干部自然资源资产离任审计工作方案。\n\
+            \  需要遵循湖北省审计厅公文写作规范，体现中央文件精神和湖北地方特色。\n\n* **文档整体结构**\n  文档固定包含以下部分：\n\n\
+            \  一. 标题和政策依据\n  二. 审计目标\n  三. 审计对象范围和时限\n  四. 审计内容和重点（六大方面）\n  五. 审计组织方式和时间安排\n\
+            \  六. 工作要求\n  七. 附件清单\n\n* **格式要求**\n\n  * 一级标题：中文数字（如“一、二、三”）\n  * 二级标题：中文数字加括号（如“（一）（二）”）\n\
+            \  * 三级标题：阿拉伯数字（如“1. 2.”）\n  * 段落用中文标点，保持正式公文风格\n\n项目描述：\n{{#1757644973320.description#}}\n\
+            \n请生成\"一、审计目标\"部分。这是湖北省自然资源处审计工作方案的核心导向。\n\n输入参数：\n- 年度：{{#1757644973320.audit_year#}}\n\
+            - 党的会议精神：{{#context#}}\n\n生成要求：\n1. 必须以\"坚持以习近平新时代中国特色社会主义思想特别是习近平生态文明思想为指导\"\
+            开头\n2. 体现党的最新会议精神\n3. 强调\"以履行自然资源资产管理和生态环境保护责任为主线\"\n4. 突出湖北特色，以\"加快推进美丽湖北建设\"\
+            结尾\n5. 整段成文，不分小点\n\n固定结构：\n指导思想 + 会议精神 + 决策部署 + 工作要求 + 重点任务 + 评价原则 + 目标导向\
+            \ + 湖北特色"
+        - id: ddf55ade-70f1-47c8-89b7-b0648fb678fc
+          role: user
+          text: '样例：
+
+            一、审计目标
+
+
+            坚持以习近平新时代中国特色社会主义思想特别是习近平生态文明思想为指导，全面贯彻党的二十大和二十届{具体届次}全会精神，围绕党中央国务院关于深入推进生态文明建设和绿色低碳发展的决策部署和省委省政府工作要求，坚决落实省委审计委员会会议精神，以履行自然资源资产管理和生态环境保护责任为主线，立足主体功能定位和自然资源禀赋特点，紧盯责任落实和权力运行，深入揭示生态文明建设重大任务落实、能源资源管理、生态空间管护修复、群众反映强烈的生态环境问题解决等方面的突出问题，客观公正进行审计评价，推动领导干部切实履行自然资源资产管理和生态环境保护责任，促进自然资源资产节约集约利用和生态环境安全，加快推进美丽湖北建设。'
+        selected: true
+        title: 审计目标生成
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '17582928874110'
+      position:
+        x: 1341.6056338286658
+        y: 36.915559123694564
+      positionAbsolute:
+        x: 1341.6056338286658
+        y: 36.915559123694564
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        answer: '{{#17582928874110.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 104
+      id: '1763973119507'
+      position:
+        x: 1905.153760177821
+        y: 4.057558871048333
+      positionAbsolute:
+        x: 1905.153760177821
+        y: 4.057558871048333
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    viewport:
+      x: -139.89389270895708
+      y: 214.55646799741936
+      zoom: 0.6200478991205804

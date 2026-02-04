@@ -1,0 +1,276 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 实施方案-基本情况
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/ollama:0.1.2@1312dc6fbd53ce097f57dc9f6ca21212f7e0d99461f730020d5bc558e9fe7bc6
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: knowledge-retrieval
+      id: 1764573552861-source-1764573558750-target
+      source: '1764573552861'
+      sourceHandle: source
+      target: '1764573558750'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1764573558750-source-llm-target
+      source: '1764573558750'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: region
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: region
+      height: 90
+      id: '1764573552861'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1764573558750'
+          - result
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.7
+            enable_thinking: false
+          mode: chat
+          name: DeepSeek-R1-Distill-Llama-70B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 1509e2e0-d585-4d0b-ac48-b88a757603e9
+          role: system
+          text: '角色：
+
+            你是一个自然资源资产审计专家现在要求你生成实施方案的被审区域基本情况
+
+            任务：
+
+            根据审计区域：{{#1764573552861.region#}}
+
+            把{{#context#}}按照下述模板进行提炼
+
+            规则：
+
+            （一）主体功能区定位：{{#1764573552861.region#}}在国家主体功能区规划；湖北省主体功能区规划；
+
+            （二）资源禀赋特点：包括矿产资源方面；耕地和基本农田方面；水资源方面；地质灾害风险方面；
+
+            （三）审计对象任职情况：此部分仅保留标题，不用生成，供用户自己填写
+
+
+            参照模板：
+
+            一、咸宁市基本情况
+
+            （一）主体功能区定位
+
+            1.国家层面:根据《国务院关于印发全国主体功能区规划的通知》（国发〔2010〕46号）和《全国主体功能区规划》，国家层面的重点开发区域的长江中游地区，发展壮大黄冈、鄂州、孝感、咸宁、仙桃、潜江、天门等城市，增强要素集聚能力。
+
+            2.省级层面:根据湖北省第十二次党代会报告：支持咸宁打造武汉都市圈自然生态公园城市。根据《湖北省国土空间规划（2021-2035年）》，咸宁的城市化地区：咸安区、赤壁市；重点生态功能区：通城县、通山县、崇阳县。
+
+            3.市级层面:根据《咸宁市国土空间总体规划（2021-2035年）》提出，按照湖北建设全国构建新发展格局先行区要求，坚持绿色发展和低碳转型，推动咸宁打造武汉都市圈自然生态公园城市。咸宁市以“一江一山三河五湖”的自然地理格局为基础，构建“北水南山、一组一带、一廊一屏”的国土空间总体格局。咸宁是全国桂花五大传统产区之一，是国际温泉旅游名城、中国桂花城。
+
+            （二）资源禀赋特点
+
+            1.土地资源方面。咸宁市国土总面积975155.03公顷，其中耕地172829.76公顷，占国土面积的17.72%；城镇建设用地23208.03公顷，占国土面积的2.37%；村庄建设用地33322.02公顷，占国土面积的3.41%；草地16487.43公顷，占国土面积的1.69%；林地584560.83公顷，占国土面积的59.94%；园地15965.79公顷，占国土面积的1.63%；水域96634.60公顷，占国土面积的9.91%。
+
+            2.水资源方面。长江自赤壁市黄盖湖入境，至嘉鱼县上沙湖出境，全长128千米；流域面积50平方千米以上的河流有66条。全市注册水库共546座，总库容131052万立方米，其中有大型水库3座，中型水库19座，小型水库524座（小‌I型水库78座，小II型水库446座）。列入省政府保护名录的湖泊39处，正常蓄水位时，湖泊总水面面积234.659平方公里，其中水面面积1平方公里以上的湖泊15个，1平方公里以下的湖泊24个。
+
+            3.森林、湿地资源方面。咸宁市2024年森林面积534230.96公顷，森林覆盖率54.78%。湿地总面积为88731.07公顷，占国土面积9.1%，受保护的湿地面积为50394.67公顷，湿地保护率56.79%。
+
+            4.矿产资源方面。咸宁市域共发现各类矿产资源60个矿种，已查明资源储量的矿产47种，列入省级储量表的有38种，分布相对集中。截止2024年底，共有矿山16家，其中在生产矿山8家，开采矿种主要为金矿、水泥用石灰岩、建筑石料用白云岩、建筑石料用灰岩、地热等。
+
+            5.区域特色资源方面。咸宁市现有自然保护区46处，其中自然保护区5处、风景名胜区3处、湿地公园9处、森林公园9处、地质公园2处、石漠化公园1处、省级自然保护小区17处，面积合计163343.93公顷，占咸宁市国土面积16.75%。其中国家级2处（湖北九宫山国家级自然保护区、湖北长江新螺段白鱀豚国家级自然保护区咸宁段），省级1处（湖北药姑山省级自然保护区），市级2处、县级1处、省级自然保护小区17处，面积合计72513.52公顷。咸宁市植物资源较为丰富，全市有高等植物216科，911属，1971种。国家一级保护植物有南方红豆杉、银杏、珙桐、水杉、苏铁等5种。陆生野生脊椎动物约32目81科460余种。其中国家一级保护动物有白颈长尾雉、云豹、金雕、东方白鹳、穿山甲、大鲵等12种。'
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: llm
+      position:
+        x: 680
+        y: 282
+      positionAbsolute:
+        x: 680
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 105
+      id: answer
+      position:
+        x: 980
+        y: 282
+      positionAbsolute:
+        x: 980
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - q3zgCqW1kSd4w8Y4MVZiTIWiM8VPdLuK8FSDfks6K1Lz9T7MNuoG92JIbSsOiOfW
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: weighted_score
+          reranking_model:
+            model: gte-rerank
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0.3
+            vector_setting:
+              embedding_model_name: bge-m3
+              embedding_provider_name: langgenius/ollama/ollama
+              vector_weight: 0.7
+        query_variable_selector:
+        - '1764573552861'
+        - region
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索
+        type: knowledge-retrieval
+      height: 54
+      id: '1764573558750'
+      position:
+        x: 380
+        y: 282
+      positionAbsolute:
+        x: 380
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 179.4329160833904
+      y: 88.89477437299352
+      zoom: 0.6859437893024145

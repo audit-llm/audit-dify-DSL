@@ -1,0 +1,276 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 实施方案-审计目标
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/ollama:0.1.2@1312dc6fbd53ce097f57dc9f6ca21212f7e0d99461f730020d5bc558e9fe7bc6
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: 3197a2f2-b4ad-401d-8fbd-c0484a0e1708
+    name: party_query
+    selector:
+    - env
+    - party_query
+    value: 关于自然资源生态文明建设党的会议精神
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: knowledge-retrieval
+      id: 1764585766794-source-1764586220822-target
+      source: '1764585766794'
+      sourceHandle: source
+      target: '1764586220822'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1764586220822-source-llm-target
+      source: '1764586220822'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: audit_year
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: audit_year
+      height: 90
+      id: '1764585766794'
+      position:
+        x: 79
+        y: 282
+      positionAbsolute:
+        x: 79
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+            二、审计目标
+
+            坚持以习近平新时代中国特色社会主义思想特别是习近平生态文明思想为指导，全面贯彻党的二十大和二十届{具体届次}全会精神，围绕党中央国务院关于深入推进生态文明建设和绿色低碳发展的决策部署和省委省政府工作要求，坚决落实省委审计委员会会议精神，以履行自然资源资产管理和生态环境保护责任为主线，立足主体功能定位和自然资源禀赋特点，紧盯责任落实和权力运行，深入揭示生态文明建设重大任务落实、能源资源管理、生态空间管护修复、群众反映强烈的生态环境问题解决等方面的突出问题，客观公正进行审计评价，推动领导干部切实履行自然资源资产管理和生态环境保护责任，促进自然资源资产节约集约利用和生态环境安全，加快推进美丽湖北建设。
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 1
+          mode: chat
+          name: DeepSeek-R1-Distill-Llama-70B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: f39a6e6c-9acc-428e-95b8-dc288a1c641f
+          role: system
+          text: '角色设定：
+
+            你是一个自然资源资产审计专家,现在要求你生成实施方案的审计目标
+
+            任务:
+
+            生成"二、审计目标"部分。这是湖北省自然资源处审计工作方案的核心导向。
+
+            输入参数：
+
+            - 年度：{{#1764585766794.audit_year#}}
+
+            - 党的会议精神：{{#context#}}
+
+
+            生成要求：
+
+            1.先生成 "二、审计目标" 一级标题然后换行
+
+            2. 必须以"坚持以习近平新时代中国特色社会主义思想特别是习近平生态文明思想为指导"开头
+
+            3. 体现党的最新会议精神
+
+            4. 强调"以履行自然资源资产管理和生态环境保护责任为主线"
+
+            5. 突出湖北特色，以"加快推进美丽湖北建设"结尾
+
+            6. 整段成文，不分小点
+
+
+            固定结构：
+
+            指导思想 + 会议精神 + 决策部署 + 工作要求 + 重点任务 + 评价原则 + 目标导向 + 湖北特色'
+        selected: false
+        title: 审计目标生成
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: llm
+      position:
+        x: 680
+        y: 282
+      positionAbsolute:
+        x: 680
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 105
+      id: answer
+      position:
+        x: 980
+        y: 282
+      positionAbsolute:
+        x: 980
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - Ct1REzvB7Af+8a+16LwdN7R+cryWImRyBtPRtx6tcTvJ8/FX/oJtmYT5DkEOOVMg
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: weighted_score
+          reranking_model:
+            model: gte-rerank
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0.3
+            vector_setting:
+              embedding_model_name: bge-m3
+              embedding_provider_name: langgenius/ollama/ollama
+              vector_weight: 0.7
+        query_variable_selector:
+        - env
+        - party_query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索-关于自然资源生态文明建设党的会议精神
+        type: knowledge-retrieval
+      height: 92
+      id: '1764586220822'
+      position:
+        x: 381.5157165665104
+        y: 282
+      positionAbsolute:
+        x: 381.5157165665104
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -151.99512523661542
+      y: 108.35219465584913
+      zoom: 0.9117224397007978

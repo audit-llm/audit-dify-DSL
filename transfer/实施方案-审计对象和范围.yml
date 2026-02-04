@@ -1,0 +1,185 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 实施方案-审计对象和范围
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/ollama:0.1.2@1312dc6fbd53ce097f57dc9f6ca21212f7e0d99461f730020d5bc558e9fe7bc6
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: llm
+      id: 1764587695654-llm
+      source: '1764587695654'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: audit_year
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: audit_year
+      height: 90
+      id: '1764587695654'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: DeepSeek-R1-Distill-Llama-70B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 51d3b4e5-16ad-4291-9c4c-34f33abb4a33
+          role: system
+          text: "现在请生成\"三、审计对象范围和时限\"部分。\n\n输入参数：\n- 审计单位:{{#sys.query#}}\n- 审计年度：{{#1764587695654.audit_year#}}\n\
+            \n生成要求：\n1.{审计单位} 党政主要领导干部，延伸审计当地党委办公室、政府办公室、发改、财政、自然资源、生态环境、水利和湖泊、住房和城乡建设、市场监督管理、税务等部门以及相关单位和个人。\n\
+            2. 审计范围表述为从<{{#1764587695654.audit_year#}}-3>年到<{{#1764587695654.audit_year#}}-1>年12月,重要事项追溯到以前年度。。\n\
+            \n3.分两个子项，使用中文数字编号\n\n模板结构：\n（一）审计对象：主体+延伸范围\n（二）审计范围：时间范围  \n\n参照模板：\n\
+            三、审计对象和范围\n\n（一）审计对象：{审计市县}党政主要领导干部，延伸审计当地党委办公室、政府办公室、发改、财政、自然资源、生态环境、水利和湖泊、住房和城乡建设、市场监督管理、税务等部门以及相关单位和个人。\n\
+            \n（二）审计范围：从2020年1月至2024年12月，重要事项追溯到以前年度。"
+        selected: true
+        title: 生成审计对象和范围
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: llm
+      position:
+        x: 383
+        y: 282
+      positionAbsolute:
+        x: 383
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 105
+      id: answer
+      position:
+        x: 679
+        y: 282
+      positionAbsolute:
+        x: 679
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 70.60634526417772
+      y: 110.64165750694787
+      zoom: 0.7684376068988997
