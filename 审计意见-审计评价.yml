@@ -1,0 +1,188 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 审计意见-审计评价
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.1@5cd6896c375b6765252176760ddcae95bdd2466991ff2a8bae4e1cfd1da98e13
+kind: app
+version: 0.4.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: llm
+      id: 1768892813392-llm
+      source: '1768892813392'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: region
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: region
+      height: 90
+      id: '1768892813392'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3-32b
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: ad57a17b-8c08-4124-a2fb-ae22c028ca7d
+          role: system
+          text: 你是一个自然资源资产审计专家，现在需要根据审计底稿来汇总为审计意见的审计评价部分
+        - id: 5e227340-4f55-40ed-83a2-4346acae6fef
+          role: user
+          text: '参照模板：
+
+            某同志任职期间，认真贯彻中央和省委、省政府关于生态文明建设的决策部署，落实生态环境保护"党政同责"和"一岗双责"，积极采取措施并取得以下成效:
+
+            （一）履行“一岗双责”，压实生态环保责任。一是···，二是···，三是···
+
+            （二）突出重点难点，统筹推进资源管理
+
+            （三）践行绿色发展理念，大力实施环境整治
+
+            但此次审计发现，{{#1768892813392.region#}}存在哪些问题（如污水处理厂监测指标不合格、污水处理厂运行负荷率低、土地闲置、非法采矿、违法占地等）。综合上述情况，某同志任职期间基本履行了自然资源资产管理和生态环境保护责任并取得了一定成效。对照《领导干部自然资源资产离任审计规定》提出的审计评价标准，某同志的评价等次为较好。'
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: llm
+      position:
+        x: 380
+        y: 282
+      positionAbsolute:
+        x: 380
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 105
+      id: answer
+      position:
+        x: 680
+        y: 282
+      positionAbsolute:
+        x: 680
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 122.5
+      y: 9
+      zoom: 1

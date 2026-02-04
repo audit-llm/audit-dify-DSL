@@ -1,0 +1,225 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 实施方案-审计组织方式和时间安排
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: llm
+      id: 1764589887197-llm
+      source: '1764589887197'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: audit_year
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: audit_year
+      height: 89
+      id: '1764589887197'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+            参考模板：
+
+            五、审计组织方式和时间安排
+
+            （一）审计组织方式
+
+            审计组由省审计厅、宜昌市等单位人员组成，{xx}任组长，{xx}任主审、{xx}任小组长。
+
+            按照《中华人民共和国国家审计准则》和《湖北省审计厅市县党政主要领导干部经济责任审计工作暂行规程》《湖北省审计厅审计项目进度管理办法》的规定，{xx}同志为审计现场负责人，履行审计组组长的工作职责并承担相应责任，负责相关的组织实施和现场管理工作。小组长{xx}，根据审计组组长的委托和审计分工，履行起草审计文书、组织对主要审计事项进行审计查证、协助组织实施审计现场管理、督促审计组成员工作、组织审计项目归档工作等职责。
+
+            审计组由{xx}兼职廉政监督员，{xx}任保密员，{xx}任考勤员。各审计小组指定专人负责管理涉密资料和电子数据，做好廉政和保密提醒、管理、监督。
+
+            （二）具体分工
+
+            赴{审计地点}自然资源审计组。具体分工如下：
+
+            小组长：{xx}，负责负责撰写审前调查报告、制定审计实施方案，收集汇总相关资料，按前述审计事项分工做好相关审计工作，拟定审计报告等。
+
+            组员：{xx}负责土地资源方面的审计事项。；
+
+            {xx}负责与水资源、森林、湿地资源方面的审计事项。 
+
+            （三）时间安排
+
+            1.审计准备阶段：{{#1764589887197.audit_year#}}xx月xx日至xx月xx日，组织学习审计工作方案以及相关法律法规，对江陵县主体功能定位和自然资源禀赋情况及此次审计事项进行审前调研，制定调查了解记录及审计实施方案。
+
+            2.审计现场实施阶段：{{#1764589887197.audit_year#}}xx月xx日至xx月xx日，按照审计分工、审计内容和重点进行审计，做好审计查证、审计工作底稿、审计证据编制和相关资料收集、整理。
+
+            3.审计报告阶段：{{#1764589887197.audit_year#}}xx月xx日至xx月xx日
+
+            对应审计实施方案整理审计相关资料，开展审计底稿和取证单复核工作，形成征求意见稿初稿。
+
+            现场审计期间，各审计组于x月x日、x月x日及审计出点前，向协调指导专班报送审计工作进度表，内容包括但不限于审计组工作进展、审计发现的问题线索、下一步工作打算等。[日期]开展一次中期汇报。
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            enable_thinking: true
+            temperature: 0.7
+          mode: chat
+          name: DeepSeek-R1-Distill-Llama-70B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 13f83f8b-88b6-4c20-a3bf-2d3b6e7e1e19
+          role: system
+          text: "# Role\n你是一名专业的政府审计文书撰写专家，熟悉《中华人民共和国国家审计准则》及自然资源资产离任（任中）审计的实施流程。\n\
+            \n# Task\n请根据用户提供的【审计年份】(audit_year) 和【项目背景信息】(sye_query)，撰写《领导干部自然资源资产离任（任中）审计实施方案》中的\
+            \ **“五、审计组织方式和时间安排”** 章节。\n\n# Inputs\n- **audit_year**: {{{#1764589887197.audit_year#}}}\n\
+            - **sye_query**: {{{#sys.query#}}} (包含审计组成员名单、职务、具体分工、审计各个阶段的具体起止日期等信息)\n\
+            \n# Guidelines & Constraints\n1. **格式结构**：必须严格按照以下三个二级标题进行组织：\n   - （一）审计组织方式\n\
+            \   - （二）具体分工\n   - （三）时间安排\n2. **法律引用**：在“审计组织方式”中，必须引用《中华人民共和国国家审计准则》、《湖北省审计厅市县党政主要领导干部经济责任审计工作暂行规程》和《湖北省审计厅审计项目进度管理办法》。\n\
+            3. **角色设定**：\n   - 根据 `sye_query` 提取组长、副组长（如有）、主审、小组长、廉政监督员、保密员、考勤员的具体人名。如果没有这些信息用\"\
+            [姓名]\"占位符来代替\n   - 描述职责时使用标准公文用语（如：“履行审计组组长的工作职责并承担相应责任”，“负责相关的组织实施和现场管理工作”等）。\n\
+            4. **具体分工**：\n   - 根据 `sye_query` 将审计组成员与其负责的审计板块（如：土地资源、水资源、森林资源、资金绩效等）进行对应描述。\n\
+            5. **时间安排**：\n   - 将时间划分为三个阶段：\n     1. 审计准备阶段（包含审前调研、制定方案）。\n     2.\
+            \ 审计现场实施阶段（包含审计查证、底稿编制）。\n     3. 审计报告阶段（包含复核、征求意见）。\n   - 必须包含“进度报送机制”：即提及向“协调指导专班”报送进度表的要求（通常包含具体报送日期或频率）以及“中期汇报”的安排。\n\
+            6. **语气风格**：严肃、客观、规范的行政公文风格。\n\n# Example Output Structure (Reference)\n\
+            五、审计组织方式和时间安排\n（一）审计组织方式\n审计组由省审计厅、[市/县]审计局等单位人员组成，[姓名]任组长，[姓名]任主审...\n\
+            按照《中华人民共和国国家审计准则》...规定，[姓名]为审计现场负责人...\n审计组由[姓名]兼职廉政监督员...\n\n（二）具体分工\n\
+            审计组成员[数量]名。具体分工如下：\n[姓名]：负责[具体事项]...\n[姓名]：负责[具体事项]...\n\n（三）时间安排\n1.审计准备阶段：[日期]至[日期]，组织学习...\n\
+            2.审计现场实施阶段：[日期]至[日期]，按照审计分工...\n3.审计报告阶段：[日期]至[日期]。对应审计实施方案...\n现场审计期间，各审计组于[具体日期]向协调指导专班报送审计工作进度表...\n\
+            \n# Action\n请基于上述要求和输入信息，生成完整的内容。\n没有获取的姓名以及日期生成[姓名]，[日期]占位符，不要生成虚假信息"
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: llm
+      position:
+        x: 380
+        y: 282
+      positionAbsolute:
+        x: 380
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 104
+      id: answer
+      position:
+        x: 680
+        y: 282
+      positionAbsolute:
+        x: 680
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 107.69765682933041
+      y: 66.3753333927636
+      zoom: 0.757858283255199

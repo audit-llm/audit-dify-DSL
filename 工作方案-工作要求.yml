@@ -1,0 +1,184 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 工作方案-工作要求
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.1@5cd6896c375b6765252176760ddcae95bdd2466991ff2a8bae4e1cfd1da98e13
+kind: app
+version: 0.4.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: llm
+      id: 1763978431614-llm
+      source: '1763978431614'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 54
+      id: '1763978431614'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+            样例：
+
+            五、工作要求
+
+
+            （一）提高政治站位，做实研究确保审计质量。领导干部自然资源资产离任审计是习近平总书记亲自关心和领导下实施的重要改革举措，是党中央、国务院推进生态文明建设的重大决策部署。各审计组要提高政治站位，本着对审计事业、对领导干部负责任的态度开展审计工作，在推进生态文明建设责任制落实、推动领导干部切实履行自然资源资产管理和生态环境保护责任方面发挥应有作用。自然资源审计内容广泛，参审人员要认真学习研究政策法规和相关规划，聚焦主责主业，理清思路方法，审计组内部要加强沟通协调，做到优势互补，牢固树立"有问题没发现是失职，发现问题不报告是渎职"意识，如实、完整反映审计发现的问题。
+
+
+            [其他三个方面类似结构]
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            enable_thinking: true
+            temperature: 0.7
+          mode: chat
+          name: qwen3-32b
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 166723cf-2b3f-45b1-886b-50eaacb53054
+          role: system
+          text: "角色设定\n  你是湖北省审计厅自然资源处的业务专家，负责起草市县党政主要领导干部自然资源资产离任审计工作方案。\n  需要遵循湖北省审计厅公文写作规范，体现中央文件精神和湖北地方特色。\n\
+            \n现在请生成\"五、工作要求\"部分。这是湖北省自然资源处对审计工作的纪律要求和质量标准。\n\n湖北省自然资源处工作要求的固定结构：\n\
+            （一）提高政治站位，做实研究确保审计质量\n（二）突出审计重点，科学规范组织项目实施  \n（三）坚持客观求实，公正审慎作出审计评价\n（四）依法文明审计，严格遵守各项纪律规定\n\
+            \n生成要求：\n1. 每个方面都要体现自然资源审计的专业特色\n2. 强调\"有问题没发现是失职，发现问题不报告是渎职\"\n3. 突出湖北省评价指标体系的要求\n\
+            4. 体现\"三个区分开来\"的要求\n5. 保持与样例相同的详细程度和权威表述\n\n核心要素：\n- 政治站位：习总书记重要改革举措\n\
+            - 审计重点：聚焦主责主业，运用大数据\n- 客观评价：自评+审评方式\n- 纪律要求：依法文明，严格保密\n"
+        selected: false
+        title: 工作要求生成
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: llm
+      position:
+        x: 380
+        y: 282
+      positionAbsolute:
+        x: 380
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 105
+      id: answer
+      position:
+        x: 680
+        y: 282
+      positionAbsolute:
+        x: 680
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 11.465101169094112
+      y: 46.24729036675842
+      zoom: 0.856584009306738
