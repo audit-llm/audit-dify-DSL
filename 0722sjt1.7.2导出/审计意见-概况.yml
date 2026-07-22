@@ -1,0 +1,204 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 审计意见-概况
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: llm
+      id: 1768889567843-llm
+      source: '1768889567843'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: project_name
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: project_name
+        - label: audit_year
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: audit_year
+        - label: description
+          max_length: 48
+          options: []
+          required: false
+          type: text-input
+          variable: description
+        - label: region
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: region
+      height: 167
+      id: '1768889567843'
+      position:
+        x: 81
+        y: 265
+      positionAbsolute:
+        x: 81
+        y: 265
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - sys
+          - query
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: Qwen3.5-27B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 572a8ab1-1ffa-4d13-9cab-c7d2bd59d1ee
+          role: system
+          text: '你是一个自然资源资产审计专家，现在需要你起草审计意见的内容，要求表述严谨，固定格式为：
+
+            被审计单位：
+
+            被审计领导干部：
+
+            项目名称：{{#1768889567843.project_name#}}
+
+            根据中共中央办公厅、国务院办公厅印发的《领导于部自然资源资产离任审计规定(试行)》，按省委审计委员会决定，受省委组织部委托，省审计厅派出审计组，于{{#1768889567843.audit_year#}}几月几日到几月几日，对某同志任（书记、县长等）期间自然资源资产管理和生态环境保护责任履行情况进行审计，重点审计了水、土地、森林等自然资源和相关生态环境保护情况。重点抽查了县自然资源和规划局、林业局、住房和城乡建设局、水利局等单位，{{#1768889567843.region#}}相关的乡镇，对重要事项进行了必要的延伸和追溯。某同志和县委、县人民政府及相关部门(单位)对其提供的审计所需资料的真实性、完整性负责，并对此作出了书面承诺。省审计厅的责任是依法独立实施审计并出具审计意见。'
+        selected: true
+        title: 项目情况概述
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: llm
+      position:
+        x: 388
+        y: 277
+      positionAbsolute:
+        x: 388
+        y: 277
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 104
+      id: answer
+      position:
+        x: 684
+        y: 277
+      positionAbsolute:
+        x: 684
+        y: 277
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 86.47736625514386
+      y: 155.8354552469135
+      zoom: 0.803755144032922

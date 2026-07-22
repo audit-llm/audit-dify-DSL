@@ -1,0 +1,191 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 审计意见-审计建议
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: llm
+      id: 1768893020125-llm
+      source: '1768893020125'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: audited_unit
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: audited_unit
+      height: 89
+      id: '1768893020125'
+      position:
+        x: 83
+        y: 282
+      positionAbsolute:
+        x: 83
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: Qwen3.5-27B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 68a79b92-7762-421a-9056-4ac5fb4f528c
+          role: system
+          text: ''
+        - id: a5e14dc6-7a87-473e-9a45-6a33decd2ee0
+          role: user
+          text: '参照模板：
+
+            四、审计建议：
+
+            (一)切实加强自然资源资产管理，促进自然资源节约集约利用。严格履行自然资源资产管理和生态环境保护责任，维护自然资源管理秩序。加强对已批闲置土地的清理和整改，加强对临时用地的审批和监管，进一步规范用地行为，合理利用土地资源。
+
+            (二)强化水环境质量保护意识，进一步提高生态环境质量。加强对污水处理厂的监督检查，督促其规范运行、达标排放;提高污水的收集率，加快污泥处置设施建设进度，确保污水集中收集处理;规范农村饮水水质检查工作，确保饮水安全。
+
+            (三)强化资源环境监管执法，认真整改落实。{{#1768893020125.audited_unit#}}应积极配合相关单位做好环境监督执法工作，特别是加大对违法占用耕地、基本农田行为的执法力度，要坚决采取有效措施，杜绝以罚代管的行为。督促辖区内各单位严格遵守生态保护法律法规，规范完善关于执法没收物资的处罚处置标准，认真落实审计问题整改。
+
+            {{#1768893020125.audited_unit#}}应组织有关部门和单位，切实抓好对审计发现问题的整改纠正，并在收到审计意见之日起90日内将整改结果函告省审计厅。
+
+            某同志和{{#1768893020125.audited_unit#}}如果对本意见有异议，可以自收到本意见之日起30日内，向省委审计委员会办公室申诉。省委审计委员会办公室自收到申诉之日起90日内提出复查意见，报省委审计委员会批准后作出复查决定。复查决定为最终决定。'
+        selected: true
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: llm
+      position:
+        x: 377
+        y: 282
+      positionAbsolute:
+        x: 377
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 104
+      id: answer
+      position:
+        x: 680
+        y: 282
+      positionAbsolute:
+        x: 680
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 13.5
+      y: 17
+      zoom: 1

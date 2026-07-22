@@ -1,0 +1,235 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 工作方案-组织方式和时间安排
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: llm
+      id: 1763978163155-llm
+      source: '1763978163155'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: audit_year
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: audit_year
+      height: 89
+      id: '1763978163155'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: Qwen3.5-27B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: de358a22-b252-47b1-945a-534635fd3038
+          role: system
+          text: '现在请生成"四、审计组织方式和时间安排"部分。
+
+
+            输入参数：
+
+            - 审计年度：{{#1763978163155.audit_year#}}
+
+
+            湖北省自然资源处的固定组织模式：
+
+            1. 资环处：统筹协调、质量管控、综合报告
+
+            2. 各审计组：具体实施、文书起草、现场管理
+
+            3. 三阶段时间安排：现场实施→意见起草→复核审理
+
+
+            生成要求：
+
+            1. 组织方式中突出资环处的统筹职能
+
+            2. 时间安排按三个阶段详细列出时间节点
+
+            3. 体现湖北省审计厅的内部流程特色
+
+            4. 时间节点要合理衔接，符合实际工作规律
+
+            5. 不要分点，不要有任何markdown格式
+
+
+            固定要素：
+
+            - 资环处职责：方案编写、过程管控、综合汇总
+
+            - 审计组职责：具体实施、文书起草
+
+            - 三阶段：现场审计、意见征求、复核审理
+
+
+            参考模板：
+
+            四、审计组织方式和时间安排
+
+
+            （一）审计组织方式
+
+
+            资环处负责编写审计工作方案，传达落实厅领导指示要求，统一问题定性原则和口径，审核实施方案，加强过程管控，做好中期汇报，组织开展审计评价，会核审计意见，汇总审计情况，撰写审计综合报告。各审计组分别具体实施，现场审计与经济责任审计同步，审计意见等审计文书单独报送。
+
+
+            （二）审计时间安排
+
+
+            第一阶段，{{#1763978163155.audit_year#}}年2月中旬印发审计通知书，进点开始现场审计，进点两周后递交审计实施方案，3月中旬开展中期汇报，4月中旬结束现场审计。
+
+
+            第二阶段，审计组起草审计意见(审计组征求意见稿)，经审计组长审定和同意送资环处复核，形成审计意见(征求意见稿)，经分管厅领导审核同意后，正式征求被审计单位及被审计领导干部意见。
+
+
+            第三阶段，审计组收到反馈意见后，根据反馈意见修改审计意见，形成审计意见(代拟稿)，送资环处会核、提出审计评价等次建议，报经审计组长、分管厅领导同意提交法规处审理，5月底前完成复核、审理等相关工作，6月中旬出具正式审计意见。'
+        selected: true
+        title: 组织方式和时间安排生成
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: llm
+      position:
+        x: 380.2445262196844
+        y: 282
+      positionAbsolute:
+        x: 380.2445262196844
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 104
+      id: answer
+      position:
+        x: 681.1234999030316
+        y: 282
+      positionAbsolute:
+        x: 681.1234999030316
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -67.47244874626676
+      y: 14.1448851093121
+      zoom: 1.1261052059733458

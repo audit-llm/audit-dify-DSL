@@ -1,0 +1,790 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 工作方案-审计重点
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/ollama:0.1.2@1312dc6fbd53ce097f57dc9f6ca21212f7e0d99461f730020d5bc558e9fe7bc6
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: knowledge-retrieval
+      id: 1763978629883-source-1763978674900-target
+      source: '1763978629883'
+      sourceHandle: source
+      target: '1763978674900'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1763978674900-source-1763978715962-target
+      source: '1763978674900'
+      sourceHandle: source
+      target: '1763978715962'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1763978715962-source-1763978889021-target
+      source: '1763978715962'
+      sourceHandle: source
+      target: '1763978889021'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: iteration
+      id: 1763978889021--1763979170122-target
+      source: '1763978889021'
+      sourceHandle: source
+      target: '1763979170122'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1763979170122'
+        sourceType: iteration-start
+        targetType: code
+      id: 1763979170122start-source-1763979172962-target
+      source: 1763979170122start
+      sourceHandle: source
+      target: '1763979172962'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1763979170122'
+        sourceType: code
+        targetType: llm
+      id: 1763979172962-source-1763979359779-target
+      source: '1763979172962'
+      sourceHandle: source
+      target: '1763979359779'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: iteration
+        targetType: code
+      id: 1763979170122-source-1763979605691-target
+      source: '1763979170122'
+      sourceHandle: source
+      target: '1763979605691'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: answer
+      id: 1763979605691-source-1763979693740-target
+      source: '1763979605691'
+      sourceHandle: source
+      target: '1763979693740'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: project_name
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: project_name
+        - label: description
+          max_length: 255
+          options: []
+          required: false
+          type: text-input
+          variable: description
+      height: 115
+      id: '1763978629883'
+      position:
+        x: 86
+        y: 282
+      positionAbsolute:
+        x: 86
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - 28iyihUX7ji1oHur8J28VTUjBwMZVhxOCaDCEOL0sHiKu7CprlKliozQRviBuIga
+        - LuLjqbLXBG94SqbnPU+/PtRDwdg3EQBHHFd5EJFFTg6pL9kiiIZCdKRgNxNJpFC/
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: weighted_score
+          reranking_model:
+            model: gte-rerank
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0.3
+            vector_setting:
+              embedding_model_name: bge-m3
+              embedding_provider_name: langgenius/ollama/ollama
+              vector_weight: 0.7
+        query_variable_selector:
+        - '1763978629883'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索-3审计重点
+        type: knowledge-retrieval
+      height: 119
+      id: '1763978674900'
+      position:
+        x: 377.71835835137733
+        y: 287.58256438573756
+      positionAbsolute:
+        x: 377.71835835137733
+        y: 287.58256438573756
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1763978674900'
+          - result
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: Qwen3.5-27B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 980c9f6a-d54f-4bef-b145-86c1f29dacd1
+          role: system
+          text: "* **角色设定**\n  你是湖北省审计厅自然资源处的业务专家，负责起草市县党政主要领导干部自然资源资产离任审计工作方案。\n\
+            \  需要遵循湖北省审计厅公文写作规范，体现中央文件精神和湖北地方特色。\n\n* **文档整体结构**\n  文档固定包含以下部分：\n\n\
+            \  一. 标题和政策依据\n  二. 审计目标\n  三. 审计对象范围和时限\n  四. 审计内容和重点（六大方面）\n  五. 审计组织方式和时间安排\n\
+            \  六. 工作要求\n  七. 附件清单\n\n* **格式要求**\n\n  * 一级标题：中文数字（如“一、二、三”）\n  * 二级标题：中文数字加括号（如“（一）（二）”）\n\
+            \  * 三级标题：阿拉伯数字（如“1. 2.”）\n  * 段落用中文标点，保持正式公文风格\n\n项目描述：\n{{#sys.query#}}\n\
+            \n审计重点：\n{{#context#}}\n\n你是一名熟悉自然资源资产离任审计的公文起草专家。\n已知本章标题为“三、审计内容和重点”，目标是对审计内容和重点进行系统阐述。\n\
+            \n现请你根据参考文本直接生成扁平的写作任务列表，每个任务对应一个“一级小标题 + 二级小标题”的组合。\n\n要求：\n\n一级小标题采用“（一）（二）（三）……”的结构，二级小标题采用“1.\
+            \ 2. 3. ……”的结构；\n不要嵌套结构，所有任务以扁平数组形式给出；\n每个任务需包含：所属一级标题信息、二级标题信息、建议字数、关键写作要点列表。\n\
+            当用户给出参考案例时，禁止照抄整理，而是需要根据参考案例的思路，结合审计项目实际情况进行分析、润色、优化。\n\n\n输出严格使用如下 JSON\
+            \ 结构：\n{\n  “chapter_no”: “三”,\n  “chapter_title”: “审计内容和重点”,\n  “items”:\
+            \ [\n    {\n      “order”: 1,\n      “first_id”: “一”,\n      “first_marker”:\
+            \ “（一）”,\n      “first_title”: “…”,\n      “second_id”: “1”,\n      “second_marker”:\
+            \ “1.”,\n      “second_title”: “…”,\n      “target_length”: “400-600字”,\n\
+            \      “key_points”: [”…”, “…”]\n    }\n  // …\n  ]\n}\n\n只输出 JSON，不要多余说明。"
+        - id: 5d17ed6d-8377-40ce-8823-c1cfbd3a16ca
+          role: user
+          text: '请参考这个往年的案例，按照提示词模板要求，生成第三章目录结构，以json形式输出。
+
+            请结合当年情况进行适当的润色、组织和优化，一定要有变化。
+
+
+            案例参考：
+
+            三、审计内容和重点
+
+            （一）自然资源资产实物量变化和特定负面事项
+
+            1.自然资源资产实物量变化方面。
+
+            2.特定负面事项方面。
+
+            （二）贯彻执行生态文明建设方针政策和决策部署情况
+
+            1.生态文明建设重大决策部署落实方面。
+
+            2.贯彻落实生态文明建设相关重要指示批示方面。
+
+            3.生态文明体制改革重点任务推进方面。
+
+            （三）遵守自然资源资产管理和生态环境保护法律法规以及参与有关决策情况
+
+            1.自然资源资产管理和生态环境保护相关法律法规、政策措施和重大规划的制定、实施、调整方面。
+
+            2.重大事项决策、审批方面。
+
+            3.重大经济活动或建设项目遵守法律法规方面。
+
+            （四）自然资源开发利用与生态保护修复情况
+
+            1.土地资源开发利用及耕地保护方面。
+
+            2.水资源开发利用及生态保护修复方面。
+
+            3.矿产资源开发利用及矿山环境综合治理方面。
+
+            4.森林、湿地开发利用及生态保护修复方面。
+
+            5.区域特色资源开发利用及生态保护修复方面。
+
+            （五）资源环境约束性指标完成及有关监督考评情况
+
+            1.资源环境约束性指标完成方面。
+
+            2.资源环境监督考评方面。
+
+            3.以前年度查出问题整改落实方面。
+
+            4.资源环境统计数据或监测数据真实性监管方面。
+
+            5.公众对本地区自然资源资产管理和生态环境保护情况的满意度。
+
+            （六）资源环境相关资金项目管理绩效
+
+            1.资源环境领域财政资金使用绩效方面。
+
+            2.资源环境领域项目建设目标完成方面。'
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              chapter_no:
+                type: string
+              chapter_title:
+                type: string
+              items:
+                items:
+                  additionalProperties: false
+                  properties:
+                    first_id:
+                      type: string
+                    first_marker:
+                      type: string
+                    first_title:
+                      type: string
+                    key_points:
+                      items:
+                        type: string
+                      type: array
+                    order:
+                      type: number
+                    second_id:
+                      type: string
+                    second_marker:
+                      type: string
+                    second_title:
+                      type: string
+                    target_length:
+                      type: string
+                  required:
+                  - order
+                  - first_id
+                  - first_marker
+                  - first_title
+                  - second_id
+                  - second_marker
+                  - second_title
+                  - target_length
+                  - key_points
+                  type: object
+                type: array
+            required:
+            - chapter_no
+            - chapter_title
+            - items
+            type: object
+        structured_output_enabled: true
+        title: 三审计重点的（二）级标题
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1763978715962'
+      position:
+        x: 694.9184883580733
+        y: 282
+      positionAbsolute:
+        x: 694.9184883580733
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "def main(arg1) -> dict:\n    return {\n        \"result\": arg1,\n\
+          \    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[object]
+        selected: false
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - '1763978715962'
+          - structured_output
+          - items
+          value_type: object
+          variable: arg1
+      height: 53
+      id: '1763978889021'
+      position:
+        x: 998
+        y: 282
+      positionAbsolute:
+        x: 998
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 169
+        is_parallel: true
+        iterator_input_type: array[object]
+        iterator_selector:
+        - '1763978889021'
+        - result
+        output_selector:
+        - '1763979359779'
+        - text
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1763979170122start
+        title: 迭代
+        type: iteration
+        width: 692
+      height: 169
+      id: '1763979170122'
+      position:
+        x: 1285.1660082684546
+        y: 282
+      positionAbsolute:
+        x: 1285.1660082684546
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 692
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1763979170122start
+      parentId: '1763979170122'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 1309.1660082684546
+        y: 350
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        code: "def main(arg1) -> dict:\n    return {\n        \"order\": arg1.get(\"\
+          order\", 0),\n        \"first_id\": arg1.get(\"first_id\", \"\"),\n    \
+          \    \"first_marker\": arg1.get(\"first_marker\", \"\"),\n        \"first_title\"\
+          : arg1.get(\"first_title\", \"\"),\n        \"second_id\": arg1.get(\"second_id\"\
+          , \"\"),\n        \"second_marker\": arg1.get(\"second_marker\", \"\"),\n\
+          \        \"second_title\": arg1.get(\"second_title\", \"\"),\n        \"\
+          target_length\": arg1.get(\"target_length\", \"\"),\n        \"key_points\"\
+          : arg1.get(\"key_points\", []),\n    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1763979170122'
+        outputs:
+          first_id:
+            children: null
+            type: string
+          first_marker:
+            children: null
+            type: string
+          first_title:
+            children: null
+            type: string
+          key_points:
+            children: null
+            type: array[string]
+          order:
+            children: null
+            type: number
+          second_id:
+            children: null
+            type: string
+          second_marker:
+            children: null
+            type: string
+          second_title:
+            children: null
+            type: string
+          target_length:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行 2
+        type: code
+        variables:
+        - value_selector:
+          - '1763979170122'
+          - item
+          value_type: object
+          variable: arg1
+      height: 53
+      id: '1763979172962'
+      parentId: '1763979170122'
+      position:
+        x: 128
+        y: 68
+      positionAbsolute:
+        x: 1413.1660082684546
+        y: 350
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1763978674900'
+          - result
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1763979170122'
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: Qwen3.5-27B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 36b26051-0da3-4365-b21e-f27f93732fe9
+          role: system
+          text: "* **角色设定**\n  你是湖北省审计厅自然资源处的业务专家，负责起草市县党政主要领导干部自然资源资产离任审计工作方案。\n\
+            \  需要遵循湖北省审计厅公文写作规范，体现中央文件精神和湖北地方特色。\n\n* **文档整体结构**\n  文档固定包含以下部分：\n\n\
+            \  一. 标题和政策依据\n  二. 审计目标\n  三. 审计对象范围和时限\n  四. 审计内容和重点（六大方面）\n  五. 审计组织方式和时间安排\n\
+            \  六. 工作要求\n  七. 附件清单\n\n* **格式要求**\n\n  * 一级标题：中文数字（如“一、二、三”）\n  * 二级标题：中文数字加括号（如“（一）（二）”）\n\
+            \  * 三级标题：阿拉伯数字（如“1. 2.”）\n  * 段落用中文标点，保持正式公文风格\n\n审计重点：\n{{#context#}}\n\
+            \n你正在为一份自然资源资产离任审计文书编写本章\"三、审计内容和重点\"中的一个二级小节内容。\n\n【所属一级小标题】\n\n标识：{{#1763979172962.first_id#}}\n\
+            标题：{{#1763979172962.first_title#}}\n\n【当前二级小标题写作任务】\n\n编号：{{#1763979172962.second_id#}}\n\
+            标题：{{#1763979172962.second_title#}}\n建议长度：{{#1763979172962.target_length#}}\n\
+            关键要点：{{#1763979172962.key_points#}}\n\n请根据以上信息，参考下列示例文风，生成该二级小标题下的具体内容：\n\
+            \n首先输出一行：\"{{#1763979172962.second_marker#}} {{#1763979172962.second_title#}}。\"\
+            \n然后按\"（1）（2）（3）……\"列出 2～4 个小点，每个小点 2～4 句，内容围绕关键要点展开，写明要调阅的资料、分析维度、重点揭示的问题。\n\
+            文风参照党政公文和你提供的样例，如\"（1）摸清水资源实物量底数及大幅减少情况。调阅水利部门水资源公报……\"。\n严格限定在本二级标题及其所属一级标题范围内，不得扩展到其他章节内容。\n\
+            \n输出格式\n\n纯文本片段；\n不要输出所属一级标题（如\"（一）……\"），只写当前二级标题及其具体内容。\n\n重要格式要求：\n\
+            请直接输出 JSON 字符串，不要包含 ```json 等 Markdown 标记。\nJSON 内容中的双引号必须转义（例如使用 \\\"\
+            ），或者确保内容中只使用中文引号（“”）。\n如果内容包含换行符，请使用 \\n。\n\n最终请用如下 JSON 结构返回：\n{\n\"\
+            order\": {{#1763979172962.order#}}\n\"first_id\": \"{{#1763979172962.first_id#}}\"\
+            ,\n\"first_marker\": \"{{#1763979172962.first_marker#}}\",\n\"first_title\"\
+            : \"{{#1763979172962.first_title#}}\",\n\"second_id\": \"{{#1763979172962.second_id#}}\"\
+            ,\n\"second_marker\": \"{{#1763979172962.second_marker#}}\",\n\"second_title\"\
+            : \"{{#1763979172962.second_title#}}\",\n\"content\": \"这里是实际生成的文本\"\n\
+            }"
+        - id: ef04e5c5-f52b-43dc-a5ca-7b4d996d4e6d
+          role: user
+          text: '按照要求生成json格式的审计重点小结内容。content的语言用且仅用“关注xxxxxx"、”重点核查xxxxx“这种格式。根据需要，如果一个小节内容需要展开多个方面，可以用”一是“、”二是“等等并列格式展开，如果不必展开就只用关注和重点核查句式。
+
+
+            示例（不可照抄，仅供参考文章结构）：
+
+            3.重大经济活动或建设项目遵守法律法规方面。
+
+            一是关注自然资源资产管理和生态环境保护相关法律法规执行情况。重点核查是否存在违反自然资源管理和生态环境保护法律法规且造成严重后果或不良影响，由上级党委和政府（含授权有关部门）约谈通报或由中央及省领导同志指示批示严肃查处或批评问责的情形；是否存在长江流域生态环境保护和修复、土地利用管理和耕地保护、矿产资源开发利用等某一领域违法违规问题数量较多、涉及面较广，或由上级部门立案查处、挂牌督办、警示约谈且尚未消除违法状态的问题。
+
+            二是关注污染防治攻坚情况。重点核查是否存在重大项目未经环评、水土保持等审批擅自开工建设，未经环境保护验收投产运营，未按环评要求建设安装环保设施，造成环境污染，相关主管部门查处或督促整改不力等问题。'
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              content:
+                type: string
+              first_id:
+                type: string
+              first_marker:
+                type: string
+              first_title:
+                type: string
+              order:
+                type: number
+              second_id:
+                type: string
+              second_marker:
+                type: string
+              second_title:
+                type: string
+            required:
+            - order
+            - first_id
+            - second_id
+            - second_marker
+            - second_title
+            - content
+            - first_title
+            - first_marker
+            type: object
+        structured_output_enabled: true
+        title: 三审计重点的3级标题及内容
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1763979359779'
+      parentId: '1763979170122'
+      position:
+        x: 432
+        y: 60
+      positionAbsolute:
+        x: 1717.1660082684546
+        y: 342
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "from collections import defaultdict\nimport json\n\ndef main(arg1)\
+          \ -> dict:\n    \"\"\"\n    把输入的列表/JSON 合并成分组 Markdown。\n    - 支持字符串 JSON\
+          \ / dict 包 list / 直接 list\n    - 按 first_id 分组、中文数字顺序排序\n    - 组内按 second_id/second_marker/order\
+          \ 排序，兜底原始顺序\n    - 避免重复输出二级标题（若 content 已以同样标题开头则跳过）\n    \"\"\"\n\n   \
+          \ def parse_maybe_int(val):\n        \"\"\"把类似 '3.' 或 '03' 等字符串安全转成 int，失败返回\
+          \ None。\"\"\"\n        if val is None:\n            return None\n      \
+          \  try:\n            return int(str(val).rstrip(\"。\").rstrip(\".\"))\n\
+          \        except Exception:\n            return None\n\n    def ensure_trailing_punct(text:\
+          \ str) -> str:\n        if not text:\n            return \"\"\n        if\
+          \ text[-1] not in \"。.!?！？\":\n            return text + \"。\"\n       \
+          \ return text\n\n    def normalize_items(raw):\n        \"\"\"统一转成 list[dict]，无法解析返回空列表。\"\
+          \"\"\n        items = raw\n        if isinstance(items, str):\n        \
+          \    try:\n                items = json.loads(items)\n            except\
+          \ Exception:\n                return []\n        if isinstance(items, dict):\n\
+          \            if isinstance(items.get(\"items\"), list):\n              \
+          \  items = items[\"items\"]\n            elif isinstance(items.get(\"result\"\
+          ), list):\n                items = items[\"result\"]\n            else:\n\
+          \                items = [items]\n        if not isinstance(items, list):\n\
+          \            return []\n\n        normalized = []\n        for idx, it in\
+          \ enumerate(items):\n            if isinstance(it, str):\n             \
+          \   try:\n                    it = json.loads(it)\n                except\
+          \ Exception:\n                    continue\n            if not isinstance(it,\
+          \ dict):\n                continue\n            it = it.copy()\n       \
+          \     it[\"first_id\"] = str(it.get(\"first_id\", \"\"))\n            it[\"\
+          _index\"] = idx  # 保留原始顺序\n            normalized.append(it)\n        return\
+          \ normalized\n\n    items = normalize_items(arg1)\n    if not items:\n \
+          \       return {\"merged_markdown\": \"\"}\n\n    # 分组\n    grouped = defaultdict(list)\n\
+          \    first_seen_index = {}\n    for item in items:\n        fid = item[\"\
+          first_id\"]\n        grouped[fid].append(item)\n        first_seen_index.setdefault(fid,\
+          \ item[\"_index\"])\n\n    # 组内排序：优先 second_id -> second_marker -> order，兜底原始顺序\n\
+          \    def item_sort_key(item):\n        num = parse_maybe_int(item.get(\"\
+          second_id\"))\n        if num is None:\n            num = parse_maybe_int(item.get(\"\
+          second_marker\"))\n        if num is None:\n            num = parse_maybe_int(item.get(\"\
+          order\"))\n        if num is None:\n            return (1, item[\"_index\"\
+          ])\n        return (0, num)\n\n    for fid in grouped:\n        grouped[fid]\
+          \ = sorted(grouped[fid], key=item_sort_key)\n\n    # 一级排序：中文数字顺序，未知的按出现顺序兜底\n\
+          \    cn_order = [\"一\", \"二\", \"三\", \"四\", \"五\", \"六\", \"七\", \"八\"\
+          , \"九\", \"十\"]\n    order_map = {k: i for i, k in enumerate(cn_order)}\n\
+          \    sorted_fids = sorted(\n        grouped.keys(),\n        key=lambda\
+          \ fid: (order_map.get(fid, 999), first_seen_index.get(fid, 10 ** 9)),\n\
+          \    )\n\n\n    # 拼装 Markdown\n    lines = [\"三、审计内容和重点\"]\n    for fid\
+          \ in sorted_fids:\n        section_items = grouped[fid]\n        first_title\
+          \ = section_items[0].get(\"first_title\", \"\")\n        lines.append(f\"\
+          （{fid}）{first_title}\\n\" if first_title else f\"（{fid}）\\n\")\n\n     \
+          \   for item in section_items:\n            marker = str(item.get(\"second_marker\"\
+          , \"\") or \"\")\n            title = str(item.get(\"second_title\", \"\"\
+          ) or \"\")\n            content = str(item.get(\"content\", \"\") or \"\"\
+          )\n\n            heading = \" \".join([marker.strip(), title.strip()]).strip()\n\
+          \            heading = ensure_trailing_punct(heading) if heading else \"\
+          \"\n\n            # 若内容首行已经以同样标题开头，则不再重复输出标题\n            content_first_line\
+          \ = content.lstrip().splitlines()[0].strip() if content else \"\"\n    \
+          \        compare_heading = heading.rstrip(\"。\").rstrip(\".\").strip()\n\
+          \            heading_in_content = compare_heading and content_first_line.startswith(compare_heading)\n\
+          \n            if heading and not heading_in_content:\n                lines.append(heading)\n\
+          \            if content:\n                lines.append(content)\n      \
+          \      lines.append(\"\")  # 项之间空行\n\n        lines.append(\"\")  # 一级之间空行\n\
+          \n    final_markdown = \"\\n\".join(lines).rstrip()  # 去掉末尾多余换行\n    return\
+          \ {\"merged_markdown\": final_markdown}"
+        code_language: python3
+        desc: ''
+        outputs:
+          merged_markdown:
+            children: null
+            type: string
+        selected: false
+        title: 拼接审计重点
+        type: code
+        variables:
+        - value_selector:
+          - '1763979170122'
+          - output
+          value_type: array[string]
+          variable: arg1
+      height: 53
+      id: '1763979605691'
+      position:
+        x: 2054
+        y: 282
+      positionAbsolute:
+        x: 2054
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1763979605691.merged_markdown#}}'
+        desc: ''
+        selected: true
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 104
+      id: '1763979693740'
+      position:
+        x: 2358
+        y: 282
+      positionAbsolute:
+        x: 2358
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: hahaha
+        desc: ''
+        height: 109
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"审计重点，来自往年审计意见的高频","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"检索近1-3年工作方案，直接把审计重点让大模型抽出来。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 240
+      height: 109
+      id: '1764074070599'
+      position:
+        x: 328.4859175382879
+        y: 94.66458512009194
+      positionAbsolute:
+        x: 328.4859175382879
+        y: 94.66458512009194
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 240
+    viewport:
+      x: -6.340001561029226
+      y: 130.91790781404927
+      zoom: 0.6653265082273323

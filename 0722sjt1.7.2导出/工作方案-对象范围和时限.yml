@@ -1,0 +1,202 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 工作方案-对象范围和时限
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      selected: false
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1763975326794-source-llm-target
+      selected: false
+      source: '1763975326794'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: audit_year
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: audit_year
+        - label: description
+          max_length: 255
+          options: []
+          required: false
+          type: text-input
+          variable: description
+        - label: audited_unit
+          max_length: 255
+          options: []
+          required: false
+          type: text-input
+          variable: audited_unit
+      height: 140
+      id: '1763975326794'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: Qwen3.5-27B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: ee1d507f-f722-444f-b78f-3a45b30d82d1
+          role: system
+          text: "* **角色设定**\n  你是湖北省审计厅自然资源处的业务专家，负责起草市县党政主要领导干部自然资源资产离任审计工作方案。\n\
+            \  需要遵循湖北省审计厅公文写作规范，体现中央文件精神和湖北地方特色。\n\n* **文档整体结构**\n  文档固定包含以下部分：\n\n\
+            \  一. 标题和政策依据\n  二. 审计目标\n  三. 审计对象范围和时限\n  四. 审计内容和重点（六大方面）\n  五. 审计组织方式和时间安排\n\
+            \  六. 工作要求\n  七. 附件清单\n\n* **格式要求**\n\n  * 一级标题：中文数字（如“一、二、三”）\n  * 二级标题：中文数字加括号（如“（一）（二）”）\n\
+            \  * 三级标题：阿拉伯数字（如“1. 2.”）\n  * 段落用中文标点，保持正式公文风格\n\n现在请生成\"二、审计对象范围和时限\"\
+            部分。\n\n输入参数：\n- 审计市县数量：（参考项目描述：{{#1763975326794.description#}}）\n- 审计年度：{{#1763975326794.audit_year#}}\n\
+            \n生成要求：\n1. 延伸审计部门固定为：党委办公室、政府办公室、发改、财政、自然资源（自然资源和城乡建设）、生态环境、水利和湖泊、农业农村、住房和城乡建设（城市更新）、市场监督管理、税务等部门以及相关单位和个人\n\
+            2. 审计范围表述为\"行政区（含托管）全域范围内的自然资源资产管理和生态环境保护情况\"\n3. 时限固定为\"任期超过3年的，以近三年为主，重要问题可延伸或追溯\"\
+            \n4. 分三个子项，使用中文数字编号\n\n模板结构：\n（一）审计对象：数量+主体+延伸范围\n（二）审计范围：地域范围+内容范围  \n\
+            （三）审计时限：基准时间+重点时段+灵活条款\n\n参照模板：\n二、审计对象范围和时限\n\n（一）审计对象：{数量}个市县（区）党政主要领导干部，延伸审计当地党委办公室、政府办公室、发改、财政、自然资源（自然资源和城乡建设）、生态环境、水利和湖泊、农业农村、住房和城乡建设（城市更新）、市场监督管理、税务等部门以及相关单位和个人。\n\
+            \n（二）审计范围：{数量}个市县（区）行政区（含托管）全域范围内的自然资源资产管理和生态环境保护情况。\n\n（三）审计时限：审计对象任职期间，任期超过3年的，以近三年（{{{#1763975326794.audit_year#}}-3}、{{{#1763975326794.audit_year#}}-2}、{{{#1763975326794.audit_year#}}-1}年）为主，重要问题可延伸或追溯至相关年度。"
+        selected: true
+        title: 审计对象范围和时限生成
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: llm
+      position:
+        x: 494
+        y: 282
+      positionAbsolute:
+        x: 494
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 103
+      id: answer
+      position:
+        x: 980
+        y: 282
+      positionAbsolute:
+        x: 980
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    viewport:
+      x: -341.19418458784617
+      y: 195.43811142173035
+      zoom: 0.8477893672496509

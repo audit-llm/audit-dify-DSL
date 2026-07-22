@@ -1,0 +1,687 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 审计意见-处理意见
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - document
+      allowed_file_upload_methods:
+      - remote_url
+      - local_file
+      enabled: true
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1768897517091-source-1768897898184-target
+      source: '1768897517091'
+      sourceHandle: source
+      target: '1768897898184'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: document-extractor
+        targetType: llm
+      id: 1768897898184-source-llm-target
+      source: '1768897898184'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1768900126443'
+        sourceType: iteration-start
+        targetType: code
+      id: 1768900126443start-source-1768900183542-target
+      source: 1768900126443start
+      sourceHandle: source
+      target: '1768900183542'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1768900126443'
+        sourceType: code
+        targetType: llm
+      id: 1768900183542-source-1768900189250-target
+      source: '1768900183542'
+      sourceHandle: source
+      target: '1768900189250'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: llm-source-1768900205298-target
+      source: llm
+      sourceHandle: source
+      target: '1768900205298'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: iteration
+      id: 1768900205298-source-1768900126443-target
+      source: '1768900205298'
+      sourceHandle: source
+      target: '1768900126443'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: iteration
+        targetType: code
+      id: 1768900126443-source-1768905043926-target
+      source: '1768900126443'
+      sourceHandle: source
+      target: '1768905043926'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: answer
+      id: 1768905043926-source-answer-target
+      source: '1768905043926'
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 53
+      id: '1768897517091'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: Qwen3-32B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 37a8cada-1882-459c-9321-c0f24a22e96a
+          role: system
+          text: "你是一个自然资源资产审计专家，需要整合审计底稿的审计认定的要及审计结论，进行分类归纳并形成审计意见的“三、审计发现的主要问题和处理意见”部分的二级标题和三级标题（如果需要）\n\
+            输出严格使用如下 JSON 结构：\n{\n  “chapter_no”: “三”,\n  “chapter_title”: “审计发现的主要问题和处理意见”,\n\
+            \  “items”: [\n    {\n      “order”: 1,\n      “first_id”: “一”,\n    \
+            \  “first_marker”: “（一）”,\n      “first_title”: “…”,\n      “second_id”:\
+            \ “1”,\n      “second_marker”: “1.”,\n      “second_title”: “…”,\n   \
+            \   “key_points”: [”…”, “…”]\n    }\n  // …\n  ]\n}\n\n只输出 JSON，不要多余说明。"
+        - id: ba80076a-e62b-4ad4-a20c-132e9da7c48e
+          role: user
+          text: '要求：
+
+            1.二级标题的标号如”（一）（二）（三）“
+
+            2.三级标题的标号如”1. 2. 3.“
+
+            2.对{{#1768897898184.text#}}进行分类归纳总结成多类问题，如”（一）地表水资源量逐年减少“每个二级标题对应一类问题，每个三级标题对应一个问题（一类问题下可能存在多个问题，比如（二）污水处理方面包含1.污水处理厂管理问题2.部分污水处理厂出厂水质指标检测不全
+
+            按照提示词模板要求，生成“三、审计发现的主要问题和处理意见”目录结构，以json形式输出。
+
+            '
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              chapter_no:
+                type: string
+              chapter_title:
+                type: string
+              items:
+                items:
+                  additionalProperties: false
+                  properties:
+                    first_id:
+                      type: string
+                    first_marker:
+                      type: string
+                    first_title:
+                      type: string
+                    key_points:
+                      items:
+                        type: string
+                      type: array
+                    order:
+                      type: number
+                    second_id:
+                      type: string
+                    second_marker:
+                      type: string
+                    second_title:
+                      type: string
+                  required:
+                  - order
+                  - first_id
+                  - first_marker
+                  - first_title
+                  - key_points
+                  type: object
+                type: array
+            required:
+            - chapter_no
+            - chapter_title
+            - items
+            type: object
+        structured_output_enabled: true
+        title: 生成目录
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: llm
+      position:
+        x: 675.9054118488807
+        y: 282
+      positionAbsolute:
+        x: 675.9054118488807
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1768905043926.merged_markdown#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 104
+      id: answer
+      position:
+        x: 2504.64914225091
+        y: 299.6388937035453
+      positionAbsolute:
+        x: 2504.64914225091
+        y: 299.6388937035453
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_array_file: true
+        selected: false
+        title: 文档提取器
+        type: document-extractor
+        variable_selector:
+        - sys
+        - files
+      height: 93
+      id: '1768897898184'
+      position:
+        x: 377.10546159042985
+        y: 276.21092318085965
+      positionAbsolute:
+        x: 377.10546159042985
+        y: 276.21092318085965
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 177
+        is_parallel: false
+        iterator_input_type: array[object]
+        iterator_selector:
+        - '1768900205298'
+        - result
+        output_selector:
+        - '1768900189250'
+        - text
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1768900126443start
+        title: 迭代
+        type: iteration
+        width: 690
+      height: 177
+      id: '1768900126443'
+      position:
+        x: 1368.619722324257
+        y: 299.6388937035453
+      positionAbsolute:
+        x: 1368.619722324257
+        y: 299.6388937035453
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 690
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1768900126443start
+      parentId: '1768900126443'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 1392.619722324257
+        y: 367.6388937035453
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        code: "\ndef main(arg1) -> dict:\n    return {\n        \"order\": arg1.get(\"\
+          order\", 0),\n        \"first_id\": arg1.get(\"first_id\", \"\"),\n    \
+          \    \"first_marker\": arg1.get(\"first_marker\", \"\"),\n        \"first_title\"\
+          : arg1.get(\"first_title\", \"\"),\n        \"second_id\": arg1.get(\"second_id\"\
+          , \"\"),\n        \"second_marker\": arg1.get(\"second_marker\", \"\"),\n\
+          \        \"second_title\": arg1.get(\"second_title\", \"\"),\n        \"\
+          key_points\": arg1.get(\"key_points\", []),\n    }\n"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1768900126443'
+        outputs:
+          first_id:
+            children: null
+            type: string
+          first_marker:
+            children: null
+            type: string
+          first_title:
+            children: null
+            type: string
+          key_points:
+            children: null
+            type: array[string]
+          order:
+            children: null
+            type: number
+          second_id:
+            children: null
+            type: string
+          second_marker:
+            children: null
+            type: string
+          second_title:
+            children: null
+            type: string
+        selected: false
+        title: 填充目录
+        type: code
+        variables:
+        - value_selector:
+          - '1768900126443'
+          - item
+          value_type: string
+          variable: arg1
+      height: 53
+      id: '1768900183542'
+      parentId: '1768900126443'
+      position:
+        x: 138.13088443349557
+        y: 72.18917630223848
+      positionAbsolute:
+        x: 1506.7506067577526
+        y: 371.8280700057838
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1768900126443'
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: Qwen3.5-27B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: b2801a2e-929e-498f-9187-524066a01ad9
+          role: system
+          text: '你正在为一份自然资源资产离任审计文书编写本章"三、审计发现的主要问题和处理意见"中的一个二级小节内容。
+
+
+            【所属一级小标题】
+
+
+            标识：{{#1768900183542.first_id#}}
+
+            标题：{{#1768900183542.first_title#}}
+
+
+            【当前二级小标题写作任务】
+
+
+            编号：{{#1768900183542.second_id#}}
+
+            标题：{{#1768900183542.second_title#}}
+
+            关键要点：{{#1768900183542.key_points#}}
+
+            严格遵循文件的阐述：{{#1768897898184.text#}}
+
+
+            请根据以上信息，参考下列示例文风，生成该二级小标题下的具体内容：
+
+
+            首先输出一行："{{#1768900183542.first_title#}}{{#1768900183542.second_title#}}。"
+
+
+            输出格式为纯文本片段，不要输出所属一级标题（如"（一）……"），只写当前二级标题及其具体内容。
+
+
+            重要格式要求：
+
+            请直接输出 JSON 字符串，不要包含 json 等 Markdown 标记。
+
+            JSON 内容中的双引号必须转义（例如使用 \"），或者确保内容中只使用中文引号（“”）。
+
+            如果内容包含换行符，请使用 \n。
+
+            最终请用如下 JSON 结构返回：
+
+            {
+
+            "order": {{#1768900183542.order#}}
+
+            "first_id": "{{#1768900183542.first_id#}}",
+
+            "first_marker": "{{#1768900183542.first_marker#}}",
+
+            "first_title": "{{#1768900183542.first_title#}}",
+
+            "second_id": "{{#1768900183542.second_id#}}",
+
+            "second_marker": "{{#1768900183542.second_marker#}}",
+
+            "second_title": "{{#1768900183542.second_title#}}",
+
+            "content": "这里是实际生成的文本"
+
+            }'
+        selected: true
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              content:
+                type: string
+              first_id:
+                type: string
+              first_marker:
+                type: string
+              first_title:
+                type: string
+              order:
+                type: number
+              second_id:
+                type: string
+              second_marker:
+                type: string
+              second_title:
+                type: string
+            required:
+            - order
+            - first_id
+            - first_marker
+            - first_title
+            - content
+            type: object
+        structured_output_enabled: true
+        title: 内容填充
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1768900189250'
+      parentId: '1768900126443'
+      position:
+        x: 412.93785159445497
+        y: 65
+      positionAbsolute:
+        x: 1781.557573918712
+        y: 364.6388937035453
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "\ndef main(arg1) -> dict:\n    return {\n        \"result\": arg1 \n\
+          \    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[object]
+        selected: false
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - llm
+          - structured_output
+          - items
+          value_type: object
+          variable: arg1
+      height: 53
+      id: '1768900205298'
+      position:
+        x: 1024.9180558135995
+        y: 291.42564668003666
+      positionAbsolute:
+        x: 1024.9180558135995
+        y: 291.42564668003666
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "from collections import defaultdict\nimport json\n\ndef main(arg1)\
+          \ -> dict:\n    \"\"\"\n    把输入的列表/JSON 合并成分组 Markdown。\n    - 支持字符串 JSON\
+          \ / dict 包 list / 直接 list\n    - 按 first_id 分组、中文数字顺序排序\n    - 组内按 second_id/second_marker/order\
+          \ 排序，兜底原始顺序\n    - 避免重复输出二级标题（若 content 已以同样标题开头则跳过）\n    \"\"\"\n\n   \
+          \ def parse_maybe_int(val):\n        \"\"\"把类似 '3.' 或 '03' 等字符串安全转成 int，失败返回\
+          \ None。\"\"\"\n        if val is None:\n            return None\n      \
+          \  try:\n            return int(str(val).rstrip(\"。\").rstrip(\".\"))\n\
+          \        except Exception:\n            return None\n\n    def ensure_trailing_punct(text:\
+          \ str) -> str:\n        if not text:\n            return \"\"\n        if\
+          \ text[-1] not in \"。.!?！？\":\n            return text + \"。\"\n       \
+          \ return text\n\n    def normalize_items(raw):\n        \"\"\"统一转成 list[dict]，无法解析返回空列表。\"\
+          \"\"\n        items = raw\n        if isinstance(items, str):\n        \
+          \    try:\n                items = json.loads(items)\n            except\
+          \ Exception:\n                return []\n        if isinstance(items, dict):\n\
+          \            if isinstance(items.get(\"items\"), list):\n              \
+          \  items = items[\"items\"]\n            elif isinstance(items.get(\"result\"\
+          ), list):\n                items = items[\"result\"]\n            else:\n\
+          \                items = [items]\n        if not isinstance(items, list):\n\
+          \            return []\n\n        normalized = []\n        for idx, it in\
+          \ enumerate(items):\n            if isinstance(it, str):\n             \
+          \   try:\n                    it = json.loads(it)\n                except\
+          \ Exception:\n                    continue\n            if not isinstance(it,\
+          \ dict):\n                continue\n            it = it.copy()\n       \
+          \     it[\"first_id\"] = str(it.get(\"first_id\", \"\"))\n            it[\"\
+          _index\"] = idx  # 保留原始顺序\n            normalized.append(it)\n        return\
+          \ normalized\n\n    items = normalize_items(arg1)\n    if not items:\n \
+          \       return {\"merged_markdown\": \"\"}\n\n    # 分组\n    grouped = defaultdict(list)\n\
+          \    first_seen_index = {}\n    for item in items:\n        fid = item[\"\
+          first_id\"]\n        grouped[fid].append(item)\n        first_seen_index.setdefault(fid,\
+          \ item[\"_index\"])\n\n    # 组内排序：优先 second_id -> second_marker -> order，兜底原始顺序\n\
+          \    def item_sort_key(item):\n        num = parse_maybe_int(item.get(\"\
+          second_id\"))\n        if num is None:\n            num = parse_maybe_int(item.get(\"\
+          second_marker\"))\n        if num is None:\n            num = parse_maybe_int(item.get(\"\
+          order\"))\n        if num is None:\n            return (1, item[\"_index\"\
+          ])\n        return (0, num)\n\n    for fid in grouped:\n        grouped[fid]\
+          \ = sorted(grouped[fid], key=item_sort_key)\n\n    # 一级排序：中文数字顺序，未知的按出现顺序兜底\n\
+          \    cn_order = [\"一\", \"二\", \"三\", \"四\", \"五\", \"六\", \"七\", \"八\"\
+          , \"九\", \"十\"]\n    order_map = {k: i for i, k in enumerate(cn_order)}\n\
+          \    sorted_fids = sorted(\n        grouped.keys(),\n        key=lambda\
+          \ fid: (order_map.get(fid, 999), first_seen_index.get(fid, 10 ** 9)),\n\
+          \    )\n\n\n    # 拼装 Markdown\n    lines = [\"三、审计内容和重点\"]\n    for fid\
+          \ in sorted_fids:\n        section_items = grouped[fid]\n        first_title\
+          \ = section_items[0].get(\"first_title\", \"\")\n        lines.append(f\"\
+          （{fid}）{first_title}\\n\" if first_title else f\"（{fid}）\\n\")\n\n     \
+          \   for item in section_items:\n            marker = str(item.get(\"second_marker\"\
+          , \"\") or \"\")\n            title = str(item.get(\"second_title\", \"\"\
+          ) or \"\")\n            content = str(item.get(\"content\", \"\") or \"\"\
+          )\n\n            heading = \" \".join([marker.strip(), title.strip()]).strip()\n\
+          \            heading = ensure_trailing_punct(heading) if heading else \"\
+          \"\n\n            # 若内容首行已经以同样标题开头，则不再重复输出标题\n            content_first_line\
+          \ = content.lstrip().splitlines()[0].strip() if content else \"\"\n    \
+          \        compare_heading = heading.rstrip(\"。\").rstrip(\".\").strip()\n\
+          \            heading_in_content = compare_heading and content_first_line.startswith(compare_heading)\n\
+          \n            if heading and not heading_in_content:\n                lines.append(heading)\n\
+          \            if content:\n                lines.append(content)\n      \
+          \      lines.append(\"\")  # 项之间空行\n\n        lines.append(\"\")  # 一级之间空行\n\
+          \n    final_markdown = \"\\n\".join(lines).rstrip()  # 去掉末尾多余换行\n    return\
+          \ {\"merged_markdown\": final_markdown}"
+        code_language: python3
+        desc: ''
+        outputs:
+          merged_markdown:
+            children: null
+            type: string
+        selected: false
+        title: 拼接
+        type: code
+        variables:
+        - value_selector:
+          - '1768900126443'
+          - output
+          value_type: array[string]
+          variable: arg1
+      height: 53
+      id: '1768905043926'
+      position:
+        x: 2158.404974956914
+        y: 299.6388937035453
+      positionAbsolute:
+        x: 2158.404974956914
+        y: 299.6388937035453
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -641.1100802288433
+      y: 59.32866782477487
+      zoom: 0.6582314042776012

@@ -1,0 +1,352 @@
+app:
+  description: 用于审计底稿相关应用的生成
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 审计底稿_Deprecated
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/ollama:0.1.2@1312dc6fbd53ce097f57dc9f6ca21212f7e0d99461f730020d5bc558e9fe7bc6
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1764488204707-source-1764252044266-target
+      source: '1764488204707'
+      sourceHandle: source
+      target: '1764252044266'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1764252044266-source-1764488547270-target
+      source: '1764252044266'
+      sourceHandle: source
+      target: '1764488547270'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1764251725991-source-1764489645462-target
+      source: '1764251725991'
+      sourceHandle: source
+      target: '1764489645462'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1764489645462-source-1764490552775-target
+      source: '1764489645462'
+      sourceHandle: source
+      target: '1764490552775'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: knowledge-retrieval
+      id: 1764490552775-source-1764488204707-target
+      source: '1764490552775'
+      sourceHandle: source
+      target: '1764488204707'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 项目名称
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: project_name
+        - label: 审计调查事项
+          max_length: 256
+          options: []
+          required: false
+          type: text-input
+          variable: project_event
+        - label: 审计要点
+          max_length: 1000000
+          options: []
+          required: false
+          type: paragraph
+          variable: audit_finding
+      height: 141
+      id: '1764251725991'
+      position:
+        x: 26.98408610368986
+        y: 276.1589345609158
+      positionAbsolute:
+        x: 26.98408610368986
+        y: 276.1589345609158
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1764488204707'
+          - result
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: Qwen3.5-27B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 5b72010d-8aa8-4899-8551-22ebb4ece65b
+          role: system
+          text: "# Role\n你是一位拥有20年经验的资深政府审计师，擅长自然资源资产审计。你的任务是根据用户提供的【审计认定要点】，结合检索到的【相关法规】，撰写规范的审计底稿后续内容。\n\
+            \n# Context (检索到的法规)\n{{#context#}}\n\n# Input\n项目名称：\n{{#1764251725991.project_name#}}\n\
+            审计调查事项：\n{{#1764251725991.project_event#}}\n (审计认定要点):\n{{#1764251725991.audit_finding#}}\n\
+            \n# Task\n请基于上述信息，补全审计底稿的后两部分：\n1. **法规引用**：指出上述问题违反了哪些具体法律法规。\n2. **审计结论/意见**：定性问题性质，并提出整改要求。\n\
+            \n# Constraints & Style\n1. **法规引用精准**：优先使用【Context】中检索到的法规。格式为：“上述问题不符合《法规名称》第X条‘...’的规定。”\
+            \ 如果检索结果中没有完全匹配的，可以调用你的通用法律知识，但必须确保引用真实存在。你需要判断是否使用用户检索到的法规，因为用户检索到的也不一定完全正确。\n\
+            2. **结论逻辑严密**：结论要遵循“定性+归责+整改”的逻辑。\n   - 定性：如“管理不规范”、“履职不到位”。\n   - 归责：明确责任主体（如县人民政府、自然资源局等）。\n\
+            \   - 整改：使用标准术语，具备官方语气。\n3. **语气**：客观、严肃、精炼，符合公文规范。\n\n# Output Format\n\
+            请直接输出以下格式内容，不要包含其他寒暄语：\n\n**审计法规依据：**\n上述问题不符合《[法规名称]》第X条“……”的规定。\n\n\
+            **审计结论及意见：**\n[责任主体]应[具体指令1]（输出长度为一句话，尽可能简短）"
+        selected: false
+        title: LLM-法律依据
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1764252044266'
+      position:
+        x: 288.85714285714295
+        y: 623.8571428571429
+      positionAbsolute:
+        x: 288.85714285714295
+        y: 623.8571428571429
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - EY7h408TgMQhFRlea+CWc86JDpwi2ymbtbaSyaqtpc9/VYRZ23a00ZegwmoxC3CV
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: weighted_score
+          reranking_model:
+            model: gte-rerank
+            provider: langgenius/tongyi/tongyi
+          score_threshold: null
+          top_k: 6
+          weights:
+            keyword_setting:
+              keyword_weight: 0.3
+            vector_setting:
+              embedding_model_name: bge-m3
+              embedding_provider_name: langgenius/ollama/ollama
+              vector_weight: 0.7
+        query_variable_selector:
+        - '1764490552775'
+        - result
+        retrieval_mode: multiple
+        selected: false
+        title: 法律条文检索
+        type: knowledge-retrieval
+      height: 91
+      id: '1764488204707'
+      position:
+        x: -28.00000000000007
+        y: 623.8571428571429
+      positionAbsolute:
+        x: -28.00000000000007
+        y: 623.8571428571429
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1764252044266'
+          - text
+          value_type: string
+          variable: text
+        selected: false
+        title: 结束
+        type: end
+      height: 89
+      id: '1764488547270'
+      position:
+        x: 625.7939369567106
+        y: 623.8571428571429
+      positionAbsolute:
+        x: 625.7939369567106
+        y: 623.8571428571429
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: Qwen3.5-27B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 168165bc-420f-4c0e-83ab-9a11ca290f14
+          role: system
+          text: "# Role\n你是一位精通中国法律体系的审计专家。你的任务是分析【审计认定要点】，将用户的审计发现转化为高精准度的**法律法规检索查询语句**，以确保在向量数据库中能召回最相关的法条。\n\
+            \n# Input\n项目名称：\n{{#1764251725991.project_name#}}\n审计调查事项：\n{{#1764251725991.project_event#}}\n\
+            \ (审计认定要点):\n{{#1764251725991.audit_finding#}}\n\n# Task\n1. 分析输入内容，判断其涉及的行政管理领域（如：土地管理、政府采购、水资源保护、干部任用、财政预算、国有资产等）。\n\
+            2. 如果内容涉及多个领域，请提取最核心的1-2个。\n3. **不要局限于预设列表**，请根据实际内容动态生成最准确的法律领域名称。\n\
+            4.综合你对该审计事项的判断，来综合总结出可能违法违规的行为。\n\n# Output Format\n核心法律领域 + 总结可能的的违法违规行为\
+            \ + 预测的法规名称关键词。不要输出任何标题、标点符号或描述性语言（如“该审计事项属于...”）。只输出用于搜索的文本。控制在 100 字以内。\n"
+        selected: true
+        title: LLM 3
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1764489645462'
+      position:
+        x: 330.59371870931494
+        y: 276.1589345609158
+      positionAbsolute:
+        x: 330.59371870931494
+        y: 276.1589345609158
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import re\n\ndef main(llm_raw_output: str) -> dict:\n    \"\"\"\n \
+          \   清洗大模型输出，移除 <think>...</think> 思考过程\n    \"\"\"\n    # 如果输入为空，直接返回空\n\
+          \    if not llm_raw_output:\n        return {\"result\": \"\"}\n    \n \
+          \   # 正则表达式匹配 <think> 标签及其内容\n    # re.DOTALL 模式确保 . 可以匹配换行符\n    pattern\
+          \ = r\"<think>.*?</think>\"\n    \n    # 将匹配到的内容替换为空字符串\n    cleaned_text\
+          \ = re.sub(pattern, \"\", llm_raw_output, flags=re.DOTALL)\n    \n    #\
+          \ 去除首尾多余的空格和换行\n    final_text = cleaned_text.strip()\n    \n    # 返回处理后的结果\n\
+          \    return {\n        \"result\": final_text\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - '1764489645462'
+          - text
+          value_type: string
+          variable: llm_raw_output
+      height: 53
+      id: '1764490552775'
+      position:
+        x: 638
+        y: 271
+      positionAbsolute:
+        x: 638
+        y: 271
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 173.4739775903838
+      y: 0.34411158831824196
+      zoom: 0.7617892204698388

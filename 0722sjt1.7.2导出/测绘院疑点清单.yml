@@ -1,0 +1,271 @@
+app:
+  description: 根据测绘院提供疑点清单生成取证单内容
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 测绘院疑点清单
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - document
+      allowed_file_upload_methods:
+      - remote_url
+      - local_file
+      enabled: true
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: true
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1763622725916-source-1766149444074-target
+      source: '1763622725916'
+      sourceHandle: source
+      target: '1766149444074'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: document-extractor
+        targetType: llm
+      id: 1766149444074-source-llm-target
+      source: '1766149444074'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 53
+      id: '1763622725916'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: "一、任务目标\n请根据输入的疑点核实表数据，生成取证单信息汇总 issue_list，并最终仅输出一个符合指定\
+            \ JSON Schema 的 JSON 结果。\n\n二、分组与聚合规则（非常重要）\n按“疑点名称”进行分类\n疑点名称完全相同的记录，合并为\
+            \ 同一个取证单（一个 issue）\n每一个不同的疑点名称，对应 issue_list 中的一个元素\nissue 字段\n直接使用该组对应的“疑点名称”\n\
+            \n三、事项摘要（abstract）生成规则\n对同一疑点名称下的多条记录进行面积与指定维度的聚合，并按照以下固定句式结构生成摘要：\n「XXX县发现\
+            \ XXX 问题共 XXX 亩。其中，YYY 维度1 XXX 亩，YYY 维度2 XXX 亩……。」\n\n0. 面积字段取值优先级规则\n\
+            在进行 面积合计与聚合计算 时，请按以下优先级确定每条记录所使用的面积数值：\n若记录中存在“核实面积”字段，且其值非空、非 0\n→ 优先使用“核实面积”\
+            \ 作为该记录的有效面积\n若“核实面积”缺失、为空或为 0\n→ 使用“疑点面积”作为该记录的有效面积\n任何一条记录在任一计算中只能使用一个面积值\n\
+            不得同时或重复计入“疑点面积”和“核实面积”\n\n面积计算一致性要求\n上述面积取值规则 必须同时适用于：\n“共 XXX 亩”的总面积计算\n\
+            “其中，……”中各聚合维度（乡镇 / 年份等）的面积汇总\n所有面积计算结果须基于 同一套取值规则，保持前后一致\n\n1. 基本字段含义（不随规则变化）\n\
+            “XXX县”：使用县级行政区名称\n“XXX问题”：使用疑点名称\n“共 XXX 亩”：\n为该疑点名称下 所有记录面积的合计值\n\n2.\
+            \ 聚合维度判定规则（关键逻辑）\n（1）优先规则：参考 sys.query\n如果 sys.query 中 明确指出聚合维度（例如：\n\
+            “按年份汇总”\n“按年度统计”\n“按整改年度聚合” 等）\n则 严格按照 sys.query 指定的维度进行聚合\n示例：\n“其中，2021年\
+            \ XXX 亩，2022年 XXX 亩……”\n（2）默认规则（兜底规则）\n如果 sys.query 未明确指定任何聚合维度\n则 默认按乡镇（或街道）进行聚合\n\
+            示例：\n“其中，XX镇 XXX 亩，YY镇 XXX 亩……”\n\n3. 聚合维度通用约束（无论按什么聚合）\n无论按 乡镇 / 年份 /\
+            \ 其他维度，均需满足：\n同一聚合维度值 只出现一次\n对应面积为该维度下所有记录面积的合计值\n多个维度项之间使用 中文逗号（，） 分隔\n\
+            表述顺序应符合常识（如：\n年份按时间升序\n乡镇可按面积或表中出现顺序）\n\n4. 示例（仅作理解，不作为输出）\n按乡镇（默认）\n\
+            南漳县发现占用耕地问题共 320 亩。其中，城关镇 120 亩，九集镇 200 亩。\n按年份（sys.query 指定）\n南漳县发现占用耕地问题共\
+            \ 320 亩。其中，2021年 80 亩，2022年 240 亩。\n\n5. 重要约束\nabstract 必须为 完整的一句话或两句话\n\
+            不得出现“疑似”“可能”“初步判断”等不确定性表述\n不得引入 schema 中未定义的信息字段\n\n四、聚合项索引（aggr_items）规则\n\
+            aggr_items 用于记录本取证单中聚合了哪些“违法问题疑点一览表”的原始记录\n其值为一个 数字数组\n数字表示：\n对应原始疑点表中被聚合记录的\
+            \ 行号 / 序号 / index（以输入数据中的标识为准）\n同一疑点名称下的所有记录，其索引都应包含在该数组中\n\n五、输出格式要求（必须严格遵守）\n\
+            只输出 JSON，不要输出任何解释性文字和markdown标记\n输出内容必须 严格符合以下 JSON Schema\n不得新增任何字段，不得缺失必填字段\n\
+            \n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"issue_list\"\
+            : {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\"\
+            : \"object\",\n        \"properties\": {\n          \"issue\": {\n   \
+            \         \"type\": \"string\"\n          },\n          \"abstract\":\
+            \ {\n            \"type\": \"string\"\n          },\n          \"aggr_items\"\
+            : {\n            \"type\": \"array\",\n            \"items\": {\n    \
+            \          \"type\": \"number\"\n            }\n          }\n        },\n\
+            \        \"required\": [\n          \"issue\",\n          \"abstract\"\
+            ,\n          \"aggr_items\"\n        ],\n        \"additionalProperties\"\
+            : false\n      }\n    }\n  },\n  \"required\": [\n    \"issue_list\"\n\
+            \  ],\n  \"additionalProperties\": false\n}\n\n现在，请开始{{#sys.query#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: Qwen3.5-27B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: a30a0861-5a39-4698-b5b3-b419413869e2
+          role: system
+          text: 你是一名自然资源资产审计取证辅助系统，需要根据“疑点核实表”生成取证单所需的信息汇总。
+        - id: 5d2a6796-0d2e-45cf-bc61-d1d9721b7b27
+          role: user
+          text: '{{#sys.files#}}
+
+
+            {{#1766149444074.text#}}/'
+        - id: 120d358a-d2db-4749-be87-b0618ada8eda
+          role: assistant
+          text: 好的，上面的信息是您输入的文件，我可以帮你做什么？
+        selected: true
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              issue_list:
+                items:
+                  additionalProperties: false
+                  properties:
+                    abstract:
+                      type: string
+                    aggr_items:
+                      items:
+                        type: number
+                      type: array
+                    issue:
+                      type: string
+                  required:
+                  - issue
+                  - abstract
+                  - aggr_items
+                  type: object
+                type: array
+            required:
+            - issue_list
+            type: object
+        structured_output_enabled: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: llm
+      position:
+        x: 680
+        y: 282
+      positionAbsolute:
+        x: 680
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 104
+      id: answer
+      position:
+        x: 980
+        y: 282
+      positionAbsolute:
+        x: 980
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_array_file: true
+        selected: false
+        title: 文档提取器
+        type: document-extractor
+        variable_selector:
+        - sys
+        - files
+      height: 93
+      id: '1766149444074'
+      position:
+        x: 380
+        y: 282
+      positionAbsolute:
+        x: 380
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 109.32242003015597
+      y: 28.896868874852203
+      zoom: 0.8717582395370637
