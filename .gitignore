@@ -39,3 +39,8 @@ ENV/
 
 # Skill package
 *.skill
+
+# Dify sync tool
+sync-tool/config.json
+sync-tool/.pytest_cache/
+sync-tool/.venv/

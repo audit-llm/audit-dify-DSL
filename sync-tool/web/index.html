@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dify 工作流版本同步台</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Dify 工作流版本同步台</h1>
+      <p class="subtitle">以本仓库为版本中心，一键导出并按“上次更改时间”对比各环境。</p>
+    </div>
+    <div class="top-actions">
+      <span id="git-chip" class="chip">仓库状态加载中…</span>
+      <button id="refresh-btn" class="btn ghost" type="button">刷新</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="env-cards" class="env-grid"></section>
+
+    <section id="warnings" class="warnings hidden"></section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>跨环境时间对比</h2>
+        <span class="hint">时间来自各环境 Dify 工作流草稿的最后修改时间，导出时写入仓库元数据。</span>
+      </div>
+      <div id="compare-views"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>导出记录</h2>
+      </div>
+      <pre id="export-log" class="log">尚未执行导出。</pre>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

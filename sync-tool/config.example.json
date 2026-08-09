@@ -1,0 +1,20 @@
+{
+  "environments": {
+    "dev": {
+      "name": "开发环境",
+      "base_url": "http://10.147.18.140",
+      "email": "admin@sjt.com",
+      "password": "在此填写开发环境 Console 密码"
+    },
+    "prod": {
+      "name": "生产环境",
+      "base_url": "http://生产环境主机地址",
+      "email": "admin@sjt.com",
+      "password": "在此填写生产环境 Console 密码"
+    }
+  },
+  "export": {
+    "include_secret": false,
+    "only_modes": ["workflow", "advanced-chat"]
+  }
+}
