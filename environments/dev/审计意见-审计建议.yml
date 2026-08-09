@@ -9,9 +9,9 @@ dependencies:
 - current_identifier: null
   type: marketplace
   value:
-    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.1@5cd6896c375b6765252176760ddcae95bdd2466991ff2a8bae4e1cfd1da98e13
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.4@e46b4d846b802cf020e60ca59e0bd4266bc343fdf3a07526a4caa5ea5a18e8d0
 kind: app
-version: 0.4.0
+version: 0.3.1
 workflow:
   conversation_variables: []
   environment_variables: []
@@ -85,12 +85,12 @@ workflow:
         title: 开始
         type: start
         variables:
-        - label: audit_unit
+        - label: audited_unit
           max_length: 48
           options: []
           required: true
           type: text-input
-          variable: audit_unit
+          variable: audited_unit
       height: 90
       id: '1768893020125'
       position:
@@ -122,9 +122,10 @@ workflow:
             size: 10
         model:
           completion_params:
+            enable_thinking: false
             temperature: 0.7
           mode: chat
-          name: qwen3-32b
+          name: qwen3.5-flash
           provider: langgenius/tongyi/tongyi
         prompt_template:
         - id: 68a79b92-7762-421a-9056-4ac5fb4f528c
@@ -140,12 +141,12 @@ workflow:
 
             (二)强化水环境质量保护意识，进一步提高生态环境质量。加强对污水处理厂的监督检查，督促其规范运行、达标排放;提高污水的收集率，加快污泥处置设施建设进度，确保污水集中收集处理;规范农村饮水水质检查工作，确保饮水安全。
 
-            (三)强化资源环境监管执法，认真整改落实。{{#1768893020125.audit_unit#}}应积极配合相关单位做好环境监督执法工作，特别是加大对违法占用耕地、基本农田行为的执法力度，要坚决采取有效措施，杜绝以罚代管的行为。督促辖区内各单位严格遵守生态保护法律法规，规范完善关于执法没收物资的处罚处置标准，认真落实审计问题整改。
+            (三)强化资源环境监管执法，认真整改落实。{{#1768893020125.audited_unit#}}应积极配合相关单位做好环境监督执法工作，特别是加大对违法占用耕地、基本农田行为的执法力度，要坚决采取有效措施，杜绝以罚代管的行为。督促辖区内各单位严格遵守生态保护法律法规，规范完善关于执法没收物资的处罚处置标准，认真落实审计问题整改。
 
-            {{#1768893020125.audit_unit#}}应组织有关部门和单位，切实抓好对审计发现问题的整改纠正，并在收到审计意见之日起90日内将整改结果函告省审计厅。
+            {{#1768893020125.audited_unit#}}应组织有关部门和单位，切实抓好对审计发现问题的整改纠正，并在收到审计意见之日起90日内将整改结果函告省审计厅。
 
-            某同志和{{#1768893020125.audit_unit#}}如果对本意见有异议，可以自收到本意见之日起30日内，向省委审计委员会办公室申诉。省委审计委员会办公室自收到申诉之日起90日内提出复查意见，报省委审计委员会批准后作出复查决定。复查决定为最终决定。'
-        selected: false
+            某同志和{{#1768893020125.audited_unit#}}如果对本意见有异议，可以自收到本意见之日起30日内，向省委审计委员会办公室申诉。省委审计委员会办公室自收到申诉之日起90日内提出复查意见，报省委审计委员会批准后作出复查决定。复查决定为最终决定。'
+        selected: true
         title: LLM
         type: llm
         variables: []
@@ -159,7 +160,7 @@ workflow:
       positionAbsolute:
         x: 377
         y: 282
-      selected: false
+      selected: true
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -167,7 +168,7 @@ workflow:
     - data:
         answer: '{{#llm.text#}}'
         desc: ''
-        selected: true
+        selected: false
         title: 直接回复
         type: answer
         variables: []
@@ -179,12 +180,12 @@ workflow:
       positionAbsolute:
         x: 680
         y: 282
-      selected: true
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
     viewport:
-      x: -158.5
-      y: -21
+      x: 13.5
+      y: 17
       zoom: 1

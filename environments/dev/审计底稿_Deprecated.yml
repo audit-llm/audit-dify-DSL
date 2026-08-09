@@ -2,8 +2,8 @@ app:
   description: 用于审计底稿相关应用的生成
   icon: 🤖
   icon_background: '#FFEAD5'
-  mode: advanced-chat
-  name: 审计底稿
+  mode: workflow
+  name: 审计底稿_Deprecated
   use_icon_as_answer_icon: false
 dependencies:
 - current_identifier: null
@@ -72,6 +72,17 @@ workflow:
       type: custom
       zIndex: 0
     - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1764252044266-source-1764488547270-target
+      source: '1764252044266'
+      sourceHandle: source
+      target: '1764488547270'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
         isInIteration: false
         isInLoop: false
         sourceType: start
@@ -104,18 +115,6 @@ workflow:
       source: '1764490552775'
       sourceHandle: source
       target: '1764488204707'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
-        isInIteration: false
-        isInLoop: false
-        sourceType: llm
-        targetType: answer
-      id: 1764252044266-source-1772693135049-target
-      source: '1764252044266'
-      sourceHandle: source
-      target: '1772693135049'
       targetHandle: target
       type: custom
       zIndex: 0
@@ -193,10 +192,10 @@ workflow:
       height: 90
       id: '1764252044266'
       position:
-        x: 292.83650230666507
+        x: 288.85714285714295
         y: 623.8571428571429
       positionAbsolute:
-        x: 292.83650230666507
+        x: 288.85714285714295
         y: 623.8571428571429
       selected: false
       sourcePosition: right
@@ -243,6 +242,30 @@ workflow:
       type: custom
       width: 244
     - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1764252044266'
+          - text
+          value_type: string
+          variable: text
+        selected: false
+        title: 结束
+        type: end
+      height: 90
+      id: '1764488547270'
+      position:
+        x: 625.7939369567106
+        y: 623.8571428571429
+      positionAbsolute:
+        x: 625.7939369567106
+        y: 623.8571428571429
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
         context:
           enabled: false
           variable_selector: []
@@ -263,12 +286,6 @@ workflow:
             2. 如果内容涉及多个领域，请提取最核心的1-2个。\n3. **不要局限于预设列表**，请根据实际内容动态生成最准确的法律领域名称。\n\
             4.综合你对该审计事项的判断，来综合总结出可能违法违规的行为。\n\n# Output Format\n核心法律领域 + 总结可能的的违法违规行为\
             \ + 预测的法规名称关键词。不要输出任何标题、标点符号或描述性语言（如“该审计事项属于...”）。只输出用于搜索的文本。控制在 100 字以内。\n"
-        - id: 94014c5c-987e-4f11-8b9e-3383e8819c40
-          role: user
-          text: '{{#sys.query#}}
-
-
-            {{#sys.files#}}'
         selected: false
         title: LLM 3
         type: llm
@@ -325,27 +342,7 @@ workflow:
       targetPosition: left
       type: custom
       width: 244
-    - data:
-        answer: '{{#1764252044266.text#}}'
-        desc: ''
-        selected: false
-        title: 直接回复
-        type: answer
-        variables: []
-      height: 105
-      id: '1772693135049'
-      position:
-        x: 638
-        y: 623.8571428571429
-      positionAbsolute:
-        x: 638
-        y: 623.8571428571429
-      selected: false
-      sourcePosition: right
-      targetPosition: left
-      type: custom
-      width: 244
     viewport:
-      x: 139.55795390888386
-      y: -104.86274813102841
-      zoom: 1.0051869027514686
+      x: 173.4739775903838
+      y: 0.34411158831824196
+      zoom: 0.7617892204698388

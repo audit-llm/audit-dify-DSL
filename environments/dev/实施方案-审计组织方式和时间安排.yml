@@ -9,9 +9,9 @@ dependencies:
 - current_identifier: null
   type: marketplace
   value:
-    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.1@5cd6896c375b6765252176760ddcae95bdd2466991ff2a8bae4e1cfd1da98e13
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.4@e46b4d846b802cf020e60ca59e0bd4266bc343fdf3a07526a4caa5ea5a18e8d0
 kind: app
-version: 0.4.0
+version: 0.3.1
 workflow:
   conversation_variables: []
   environment_variables: []
@@ -99,7 +99,7 @@ workflow:
       positionAbsolute:
         x: 80
         y: 282
-      selected: true
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -155,10 +155,10 @@ workflow:
             size: 10
         model:
           completion_params:
-            enable_thinking: true
+            enable_thinking: false
             temperature: 0.7
           mode: chat
-          name: qwen3-32b
+          name: qwen3.5-flash
           provider: langgenius/tongyi/tongyi
         prompt_template:
         - id: 13f83f8b-88b6-4c20-a3bf-2d3b6e7e1e19
@@ -180,7 +180,7 @@ workflow:
             审计组成员[数量]名。具体分工如下：\n[姓名]：负责[具体事项]...\n[姓名]：负责[具体事项]...\n\n（三）时间安排\n1.审计准备阶段：[日期]至[日期]，组织学习...\n\
             2.审计现场实施阶段：[日期]至[日期]，按照审计分工...\n3.审计报告阶段：[日期]至[日期]。对应审计实施方案...\n现场审计期间，各审计组于[具体日期]向协调指导专班报送审计工作进度表...\n\
             \n# Action\n请基于上述要求和输入信息，生成完整的内容。\n没有获取的姓名以及日期生成[姓名]，[日期]占位符，不要生成虚假信息"
-        selected: false
+        selected: true
         title: LLM
         type: llm
         variables: []
@@ -194,7 +194,7 @@ workflow:
       positionAbsolute:
         x: 380
         y: 282
-      selected: false
+      selected: true
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -220,6 +220,6 @@ workflow:
       type: custom
       width: 244
     viewport:
-      x: 107.69765682933041
-      y: 66.3753333927636
+      x: 156.6976568293304
+      y: 211.37533339276357
       zoom: 0.757858283255199

@@ -9,9 +9,9 @@ dependencies:
 - current_identifier: null
   type: marketplace
   value:
-    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.1@5cd6896c375b6765252176760ddcae95bdd2466991ff2a8bae4e1cfd1da98e13
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.4@e46b4d846b802cf020e60ca59e0bd4266bc343fdf3a07526a4caa5ea5a18e8d0
 kind: app
-version: 0.4.0
+version: 0.3.1
 workflow:
   conversation_variables: []
   environment_variables: []
@@ -85,9 +85,21 @@ workflow:
         isInIteration: false
         isInLoop: false
         sourceType: knowledge-retrieval
-        targetType: llm
-      id: 1765270648431-source-llm-target
+        targetType: code
+      id: 1765270648431-source-1785340872901-target
       source: '1765270648431'
+      sourceHandle: source
+      target: '1785340872901'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1785340872901-source-llm-target
+      source: '1785340872901'
       sourceHandle: source
       target: llm
       targetHandle: target
@@ -100,7 +112,7 @@ workflow:
         title: 开始
         type: start
         variables: []
-      height: 53
+      height: 54
       id: '1765270628366'
       position:
         x: 80
@@ -121,7 +133,7 @@ workflow:
           - result
         desc: ''
         memory:
-          query_prompt_template: '{{#sys.query#}}
+          query_prompt_template: '用户提问：{{#sys.query#}}
 
 
             {{#sys.files#}}'
@@ -133,32 +145,35 @@ workflow:
             size: 10
         model:
           completion_params:
+            enable_thinking: false
             temperature: 0.7
           mode: chat
-          name: qwen3-32b
+          name: qwen3.5-flash
           provider: langgenius/tongyi/tongyi
         prompt_template:
         - id: 932b5a00-678a-47e0-8417-d174eab862a3
           role: system
           text: 你是一个自然资源审计领域的法律专家，擅长从法律法规库中检索知识，并结合用户提出的请求进行问题定性。
-        - id: 0bd4c18a-bc1f-4004-a844-bfc2dfbbb6ad
+        - id: 7fe0d8cb-4962-4ff6-a697-0ba1c210a33e
           role: user
-          text: '{{#context#}}'
-        selected: true
+          text: '{{#context#}}
+
+            知识库信息：{{#1785340872901.result#}}'
+        selected: false
         title: LLM
         type: llm
         variables: []
         vision:
           enabled: false
-      height: 89
+      height: 90
       id: llm
       position:
-        x: 680
+        x: 973.2434075439178
         y: 282
       positionAbsolute:
-        x: 680
+        x: 973.2434075439178
         y: 282
-      selected: true
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -170,13 +185,13 @@ workflow:
         title: 直接回复
         type: answer
         variables: []
-      height: 104
+      height: 105
       id: answer
       position:
-        x: 980
+        x: 1280
         y: 282
       positionAbsolute:
-        x: 980
+        x: 1280
         y: 282
       selected: false
       sourcePosition: right
@@ -185,37 +200,86 @@ workflow:
       width: 244
     - data:
         dataset_ids:
-        - 4pGVzYRn13tg0b9mnZq190bzFoXrM+1dLZPbwp7DsXiYfXIfjxsm4U35uVe3ob1w
+        - 38p3t2B73cX+BSMzNFlQSOmbHO9Qn82sJnAIaoD2D1qF80XvoZO2jqmciTo/A+9S
         desc: ''
+        metadata_filtering_mode: disabled
+        metadata_model_config:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.7-plus
+          provider: langgenius/tongyi/tongyi
         multiple_retrieval_config:
           reranking_enable: false
-          reranking_mode: reranking_model
+          reranking_mode: weighted_score
           reranking_model:
-            model: gte-rerank
+            model: qwen3-rerank
             provider: langgenius/tongyi/tongyi
           score_threshold: null
           top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0.3
+            vector_setting:
+              embedding_model_name: bge-m3
+              embedding_provider_name: langgenius/ollama/ollama
+              vector_weight: 0.7
         query_variable_selector:
-        - '1765270628366'
-        - sys.query
+        - sys
+        - query
         retrieval_mode: multiple
         selected: false
         title: 知识检索
         type: knowledge-retrieval
-      height: 91
+      height: 92
       id: '1765270648431'
       position:
-        x: 380
+        x: 378.87390125731963
         y: 282
       positionAbsolute:
-        x: 380
+        x: 378.87390125731963
         y: 282
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
+    - data:
+        code: "import json\ndef main(arg1: list) -> dict:    \n    documents = []\
+          \    \n    for doc_info in arg1:        \n        doc_name = doc_info[\"\
+          metadata\"][\"document_name\"]     \n        doc_tmp = {\"document_name\"\
+          :doc_name}  \n        doc_tmp_str = json.dumps(doc_tmp,ensure_ascii=False)\
+          \        \n        documents.append(doc_tmp_str)    \n    result = json.dumps(documents,ensure_ascii=False)\
+          \    \n    return {  \"result\": result,  }"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 提取文档元数据
+        type: code
+        variables:
+        - value_selector:
+          - '1765270648431'
+          - result
+          value_type: array[object]
+          variable: arg1
+      height: 54
+      id: '1785340872901'
+      position:
+        x: 673.2434075439178
+        y: 282
+      positionAbsolute:
+        x: 673.2434075439178
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
     viewport:
-      x: 139.72429935957916
-      y: 87.43221830655523
-      zoom: 0.9807790039885512
+      x: -793.9377590287718
+      y: 109.41078363996758
+      zoom: 0.8829069683779623

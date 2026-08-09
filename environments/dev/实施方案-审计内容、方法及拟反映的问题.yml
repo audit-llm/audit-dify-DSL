@@ -9,9 +9,9 @@ dependencies:
 - current_identifier: null
   type: marketplace
   value:
-    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.1@5cd6896c375b6765252176760ddcae95bdd2466991ff2a8bae4e1cfd1da98e13
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.4@e46b4d846b802cf020e60ca59e0bd4266bc343fdf3a07526a4caa5ea5a18e8d0
 kind: app
-version: 0.4.0
+version: 0.3.1
 workflow:
   conversation_variables: []
   environment_variables: []
@@ -252,10 +252,10 @@ workflow:
             size: 10
         model:
           completion_params:
-            enable_thinking: true
+            enable_thinking: false
             temperature: 0.7
           mode: chat
-          name: qwen3-32b
+          name: qwen3.5-flash
           provider: langgenius/tongyi/tongyi
         prompt_template:
         - id: 2e927005-d9dc-4847-b128-e2ddb54c3172
@@ -272,7 +272,7 @@ workflow:
             \n3.  **拟反映的问题**（**关键部分，需要将“关注点”转化为“问题点”**）：\n    * **指令**：将【输入素材】中的“重点核查是否存在...”转化为具体的违规表现描述。\n\
             \    * **句式模板**：请使用“重点揭示...”、“反映...”、“核查是否存在...”等句式。\n    * **内容深度**：具体到行为，如“虚假整改”、“未批先建”、“资金长期沉淀闲置”、“数据造假”、“以次充好”等。\n\
             \n# Execution\n请现在开始根据【输入素材】撰写内容。请注意，不需要生成“三、审计内容和重点”这几个字，直接从“四、审计内容、方法及拟反映的问题”开始。"
-        selected: false
+        selected: true
         title: 生成审计内容、方法以及
         type: llm
         variables: []
@@ -312,6 +312,6 @@ workflow:
       type: custom
       width: 244
     viewport:
-      x: 54.34017185277071
-      y: 25.37533339276348
+      x: -64.65982814722929
+      y: 90.37533339276341
       zoom: 0.7578582832551991

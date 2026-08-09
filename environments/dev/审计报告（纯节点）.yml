@@ -3,7 +3,7 @@ app:
   icon: 🤖
   icon_background: '#FFEAD5'
   mode: advanced-chat
-  name: 工作方案-组织方式和时间安排
+  name: 审计报告（纯节点）
   use_icon_as_answer_icon: false
 dependencies:
 - current_identifier: null
@@ -61,23 +61,27 @@ workflow:
   graph:
     edges:
     - data:
-        sourceType: start
-        targetType: llm
-      id: 1763978163155-llm
-      source: '1763978163155'
-      sourceHandle: source
-      target: llm
-      targetHandle: target
-      type: custom
-    - data:
         sourceType: llm
         targetType: answer
       id: llm-answer
+      selected: false
       source: llm
       sourceHandle: source
       target: answer
       targetHandle: target
       type: custom
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1763975326794-source-llm-target
+      selected: false
+      source: '1763975326794'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
     nodes:
     - data:
         desc: ''
@@ -91,13 +95,37 @@ workflow:
           required: true
           type: text-input
           variable: audit_year
-      height: 90
-      id: '1763978163155'
+        - label: description
+          max_length: 255
+          options: []
+          required: false
+          type: text-input
+          variable: description
+        - label: audited_unit
+          max_length: 255
+          options: []
+          required: false
+          type: text-input
+          variable: audited_unit
+        - label: project_name
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: project_name
+        - label: region
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: region
+      height: 194
+      id: '1763975326794'
       position:
-        x: 80
+        x: 77.08862291120874
         y: 282
       positionAbsolute:
-        x: 80
+        x: 77.08862291120874
         y: 282
       selected: false
       sourcePosition: right
@@ -128,70 +156,16 @@ workflow:
           name: qwen3.5-flash
           provider: langgenius/tongyi/tongyi
         prompt_template:
-        - id: de358a22-b252-47b1-945a-534635fd3038
+        - id: ee1d507f-f722-444f-b78f-3a45b30d82d1
           role: system
-          text: '现在请生成"四、审计组织方式和时间安排"部分。
-
-
-            输入参数：
-
-            - 审计年度：{{#1763978163155.audit_year#}}
-
-
-            湖北省自然资源处的固定组织模式：
-
-            1. 资环处：统筹协调、质量管控、综合报告
-
-            2. 各审计组：具体实施、文书起草、现场管理
-
-            3. 三阶段时间安排：现场实施→意见起草→复核审理
-
-
-            生成要求：
-
-            1. 组织方式中突出资环处的统筹职能
-
-            2. 时间安排按三个阶段详细列出时间节点
-
-            3. 体现湖北省审计厅的内部流程特色
-
-            4. 时间节点要合理衔接，符合实际工作规律
-
-            5. 不要分点，不要有任何markdown格式
-
-
-            固定要素：
-
-            - 资环处职责：方案编写、过程管控、综合汇总
-
-            - 审计组职责：具体实施、文书起草
-
-            - 三阶段：现场审计、意见征求、复核审理
-
-
-            参考模板：
-
-            四、审计组织方式和时间安排
-
-
-            （一）审计组织方式
-
-
-            资环处负责编写审计工作方案，传达落实厅领导指示要求，统一问题定性原则和口径，审核实施方案，加强过程管控，做好中期汇报，组织开展审计评价，会核审计意见，汇总审计情况，撰写审计综合报告。各审计组分别具体实施，现场审计与经济责任审计同步，审计意见等审计文书单独报送。
-
-
-            （二）审计时间安排
-
-
-            第一阶段，{{#1763978163155.audit_year#}}年2月中旬印发审计通知书，进点开始现场审计，进点两周后递交审计实施方案，3月中旬开展中期汇报，4月中旬结束现场审计。
-
-
-            第二阶段，审计组起草审计意见(审计组征求意见稿)，经审计组长审定和同意送资环处复核，形成审计意见(征求意见稿)，经分管厅领导审核同意后，正式征求被审计单位及被审计领导干部意见。
-
-
-            第三阶段，审计组收到反馈意见后，根据反馈意见修改审计意见，形成审计意见(代拟稿)，送资环处会核、提出审计评价等次建议，报经审计组长、分管厅领导同意提交法规处审理，5月底前完成复核、审理等相关工作，6月中旬出具正式审计意见。'
+          text: "* **角色设定**\n  你是湖北省审计厅自然资源处的业务专家，负责起草市县党政主要领导干部自然资源资产离任审计综合审计报告，汇总全省各地审计项目的审计意见，生成本年度综合的审计报告。\n\
+            \  需要遵循湖北省审计厅公文写作规范，体现中央文件精神和湖北地方特色。\n\n* **格式要求**\n\n  * 一级标题：中文数字（如“一、二、三”）\n\
+            \  * 二级标题：中文数字加括号（如“（一）（二）”）\n  * 三级标题：阿拉伯数字（如“1. 2.”）\n  * 段落用中文标点，保持正式公文风格\n\
+            \n输入参数：\n- 审计市县数量：（参考项目描述：{{#1763975326794.description#}}）\n- 审计年度：{{#1763975326794.audit_year#}}\n\
+            - 被审单位：{{#1763975326794.audited_unit#}}\n- 项目名称：{{#1763975326794.project_name#}}\n\
+            - 区域：{{#1763975326794.region#}}"
         selected: true
-        title: 组织方式和时间安排生成
+        title: 审计报告
         type: llm
         variables: []
         vision:
@@ -199,10 +173,10 @@ workflow:
       height: 90
       id: llm
       position:
-        x: 380.2445262196844
+        x: 490.99784177321874
         y: 282
       positionAbsolute:
-        x: 380.2445262196844
+        x: 490.99784177321874
         y: 282
       selected: true
       sourcePosition: right
@@ -219,10 +193,10 @@ workflow:
       height: 105
       id: answer
       position:
-        x: 681.1234999030316
+        x: 980
         y: 282
       positionAbsolute:
-        x: 681.1234999030316
+        x: 980
         y: 282
       selected: false
       sourcePosition: right
@@ -230,6 +204,6 @@ workflow:
       type: custom
       width: 244
     viewport:
-      x: -67.47244874626676
-      y: 14.1448851093121
-      zoom: 1.1261052059733458
+      x: -10.330517793987042
+      y: 202.05460123180856
+      zoom: 0.6661874055000234

@@ -9,9 +9,9 @@ dependencies:
 - current_identifier: null
   type: marketplace
   value:
-    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.1@5cd6896c375b6765252176760ddcae95bdd2466991ff2a8bae4e1cfd1da98e13
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.4@e46b4d846b802cf020e60ca59e0bd4266bc343fdf3a07526a4caa5ea5a18e8d0
 kind: app
-version: 0.4.0
+version: 0.3.1
 workflow:
   conversation_variables: []
   environment_variables:
@@ -151,7 +151,7 @@ workflow:
             enable_thinking: false
             temperature: 1
           mode: chat
-          name: qwen3-32b
+          name: qwen3.5-flash
           provider: langgenius/tongyi/tongyi
         prompt_template:
         - id: f39a6e6c-9acc-428e-95b8-dc288a1c641f
@@ -203,7 +203,7 @@ workflow:
       positionAbsolute:
         x: 680
         y: 282
-      selected: true
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -230,20 +230,27 @@ workflow:
       width: 244
     - data:
         dataset_ids:
-        - Ct1REzvB7Af+8a+16LwdN7R+cryWImRyBtPRtx6tcTvJ8/FX/oJtmYT5DkEOOVMg
+        - 38p3t2B73cX+BSMzNFlQSOmbHO9Qn82sJnAIaoD2D1qF80XvoZO2jqmciTo/A+9S
         desc: ''
         multiple_retrieval_config:
-          reranking_enable: false
+          reranking_enable: true
           reranking_mode: reranking_model
           reranking_model:
-            model: gte-rerank
+            model: qwen3-rerank
             provider: langgenius/tongyi/tongyi
           top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0.3
+            vector_setting:
+              embedding_model_name: bge-m3
+              embedding_provider_name: langgenius/ollama/ollama
+              vector_weight: 0.7
         query_variable_selector:
         - env
         - party_query
         retrieval_mode: multiple
-        selected: false
+        selected: true
         title: 知识检索-关于自然资源生态文明建设党的会议精神
         type: knowledge-retrieval
       height: 92
@@ -254,12 +261,35 @@ workflow:
       positionAbsolute:
         x: 381.5157165665104
         y: 282
-      selected: false
+      selected: true
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
+    - data:
+        author: admin
+        desc: ''
+        height: 88
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"0205：临时变更，需要改回正式效果","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 240
+      height: 88
+      id: '1770239291262'
+      position:
+        x: 371.81834127924316
+        y: 170.71841008457594
+      positionAbsolute:
+        x: 371.81834127924316
+        y: 170.71841008457594
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 240
     viewport:
-      x: -151.99512523661542
-      y: 108.35219465584913
+      x: 4.004874763384578
+      y: 135.35219465584913
       zoom: 0.9117224397007978

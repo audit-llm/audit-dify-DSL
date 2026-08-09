@@ -1,0 +1,214 @@
+{
+  "env": "dev",
+  "label": "开发环境",
+  "updated_at": "2026-08-10T03:30:32+08:00",
+  "apps": {
+    "数据分析工作流1": {
+      "app_id": "04661175-c23a-40f9-ac73-59ac0ee690a4",
+      "name": "数据分析工作流1",
+      "mode": "workflow",
+      "dify_updated_at": 1786207958,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/数据分析工作流1.yml",
+      "sha256": "6dfc777f2f4071af66578a3936fed6a655c81340ec98aa5be3c6de1194f1920c"
+    },
+    "实施方案-政策依据": {
+      "app_id": "066bbdd5-62c1-40ce-a085-8fb206ae1f01",
+      "name": "实施方案-政策依据",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1786088967,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/实施方案-政策依据.yml",
+      "sha256": "6001c21f5e398f083bbedc6e95fa4f27e8d70e6238f45477dff56fea4f8bf454"
+    },
+    "实施方案-审计组织方式和时间安排": {
+      "app_id": "7d6828a2-6ef0-4d4c-ba33-3032aed9a443",
+      "name": "实施方案-审计组织方式和时间安排",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773904,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/实施方案-审计组织方式和时间安排.yml",
+      "sha256": "3ee38a3ba86fb7ab3113bdacef08bcf177fcbfe3cdd597c170473c85c310155a"
+    },
+    "实施方案-审计内容、方法及拟反映的问题": {
+      "app_id": "53fc8e7a-bacd-47c9-9a19-0d754c6c19ad",
+      "name": "实施方案-审计内容、方法及拟反映的问题",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773902,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/实施方案-审计内容、方法及拟反映的问题.yml",
+      "sha256": "25b8b988e121d84955d42012eee9e8a014eea37b739a82f77d308eac762406ee"
+    },
+    "实施方案-审计目标": {
+      "app_id": "755e3b6f-7357-4ea6-9a45-87fa4154c8a0",
+      "name": "实施方案-审计目标",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773897,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/实施方案-审计目标.yml",
+      "sha256": "065eebd3410bf8b5e29c55bfa9b193d3e4cf4b1aba920a06209223e4103bb7bf"
+    },
+    "实施方案-审计对象和范围": {
+      "app_id": "0f3a8aaf-9a15-4912-9ef8-386bde709701",
+      "name": "实施方案-审计对象和范围",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773889,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/实施方案-审计对象和范围.yml",
+      "sha256": "04848ef4d2a8d62846bfd0a57a0388b2fd7d1723f3cc75a2537a059fb203b23b"
+    },
+    "实施方案-基本情况": {
+      "app_id": "1f609834-13a9-4904-bbfb-fdebb4860734",
+      "name": "实施方案-基本情况",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773885,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/实施方案-基本情况.yml",
+      "sha256": "a683f6775ee11fabe81ff362cf7ef6d73709f5ec9579ff172ab7a6e18c1d16f0"
+    },
+    "审计意见-审计建议": {
+      "app_id": "0d3a9711-8484-4dc9-8cfd-020a0c202575",
+      "name": "审计意见-审计建议",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773878,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/审计意见-审计建议.yml",
+      "sha256": "be6d9fde7c7d43cc34d23f9a6a53d06a9298a620809f180472bc1598a3bc54a8"
+    },
+    "审计意见-审计评价": {
+      "app_id": "96b03f6a-0061-4ddd-936d-864801145bb6",
+      "name": "审计意见-审计评价",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773875,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/审计意见-审计评价.yml",
+      "sha256": "880e901d6daf1a4c5e1d8ac562da44bf9e7ba67a00146e12c9b66855b9d0eecb"
+    },
+    "审计意见-基本情况": {
+      "app_id": "36e1ca05-bc9a-4cda-afac-f77a6876648c",
+      "name": "审计意见-基本情况",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773873,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/审计意见-基本情况.yml",
+      "sha256": "7958a85f351cb765d3e383a3f89cb9029155d3a0d49429c6598d72f96d808640"
+    },
+    "审计意见-概况": {
+      "app_id": "a9b6ec6a-9398-4a89-961a-cbd9ab8f31a3",
+      "name": "审计意见-概况",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773869,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/审计意见-概况.yml",
+      "sha256": "ddb10cf1b6ffd3f202c00fa2ccd9ccc92e0cd2aa1892cef811b6bf3b51ce84bc"
+    },
+    "审计底稿_Deprecated": {
+      "app_id": "84df7426-dd40-4591-a3d1-e7aba0cacd28",
+      "name": "审计底稿_Deprecated",
+      "mode": "workflow",
+      "dify_updated_at": 1786088972,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/审计底稿_Deprecated.yml",
+      "sha256": "81b9cf10f0e7666856f70547d379e0c56926134c895f9524e53c01ef7df44733"
+    },
+    "审计意见-处理意见": {
+      "app_id": "5ac02e92-f9bb-4a6a-89b7-cfbd6526620d",
+      "name": "审计意见-处理意见",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773854,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/审计意见-处理意见.yml",
+      "sha256": "a681aece13a7fb1f087153211593ad1f3d329f07c05622c0d791cfb25767c3a1"
+    },
+    "审计底稿": {
+      "app_id": "44f2ec6e-00ab-458f-8f9d-635562867a02",
+      "name": "审计底稿",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773849,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/审计底稿.yml",
+      "sha256": "076bc74c6dbc2d3b879d922bd0c917257915bd3d1f4153fa52f73d93165b1a58"
+    },
+    "审计报告（纯节点）": {
+      "app_id": "186fe4c6-a92d-4040-9048-b4823c91895b",
+      "name": "审计报告（纯节点）",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773826,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/审计报告（纯节点）.yml",
+      "sha256": "c543c487a2d89bf3803d26ce12f7515229eb2350ac9c7abae14f2aa677fa54af"
+    },
+    "工作方案-组织方式和时间安排": {
+      "app_id": "e76fd704-1840-4cd7-94c5-ba043bc47034",
+      "name": "工作方案-组织方式和时间安排",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1786088974,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/工作方案-组织方式和时间安排.yml",
+      "sha256": "ee80dfd8b2ec40e5ef32de714c2acf10a91ba7d88eb49e8c195de1f9de2f7cdd"
+    },
+    "工作方案-政策依据": {
+      "app_id": "b28a77dc-572e-46bc-9248-a787e1d4b14c",
+      "name": "工作方案-政策依据",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773815,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/工作方案-政策依据.yml",
+      "sha256": "8bb9a44d8336ef7cdb454df02bdc644d560683676846d50f0f9b9efb56023141"
+    },
+    "工作方案-审计重点": {
+      "app_id": "fcbcd533-52a1-4f88-b0d4-fc4d4881a2d2",
+      "name": "工作方案-审计重点",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773601,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/工作方案-审计重点.yml",
+      "sha256": "1eba986ac3472ea6ec7817208fd44a9e93d8c25f8ea7c2ff69fae08d6ed2659b"
+    },
+    "工作方案-审计目标": {
+      "app_id": "4dd03312-2e1c-42a9-8239-3feaed950aba",
+      "name": "工作方案-审计目标",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773581,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/工作方案-审计目标.yml",
+      "sha256": "f9e913f423e9870a730dcab3cd6df26a44887b051721cfe3cbe005086868330e"
+    },
+    "工作方案-工作要求": {
+      "app_id": "a033d83a-a793-4029-b94b-293794ec7ae8",
+      "name": "工作方案-工作要求",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773567,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/工作方案-工作要求.yml",
+      "sha256": "8e721cbfead4367a708c8587b8fa05339486e68b7c646599f92466114a079ef2"
+    },
+    "工作方案-对象范围和时限": {
+      "app_id": "4b0fafcb-430b-4efd-909b-7c849fee14f4",
+      "name": "工作方案-对象范围和时限",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785773563,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/工作方案-对象范围和时限.yml",
+      "sha256": "40bd795910d36f51d68c4a99c16958f1a99c01ffec960b7e05994b07ad85b94b"
+    },
+    "法律法规查询": {
+      "app_id": "d398f06b-8f6b-49ae-b228-23dd74d81f2f",
+      "name": "法律法规查询",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1786278692,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/法律法规查询.yml",
+      "sha256": "37007c1f7de2ea4337abb95709f37294b8eb82614c32deb4bbd0928bc7332426"
+    },
+    "测绘院疑点清单": {
+      "app_id": "ab27f588-b69d-4ce7-99cd-08da753f2469",
+      "name": "测绘院疑点清单",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1785741336,
+      "exported_at": "2026-08-10T03:30:32+08:00",
+      "file": "environments/dev/测绘院疑点清单.yml",
+      "sha256": "1ef0cd582f1765cab5353ab0bad781049e0b101645907dacce08b0947a12cb47"
+    }
+  }
+}

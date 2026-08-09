@@ -9,9 +9,9 @@ dependencies:
 - current_identifier: null
   type: marketplace
   value:
-    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.1@5cd6896c375b6765252176760ddcae95bdd2466991ff2a8bae4e1cfd1da98e13
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.4@e46b4d846b802cf020e60ca59e0bd4266bc343fdf3a07526a4caa5ea5a18e8d0
 kind: app
-version: 0.4.0
+version: 0.3.1
 workflow:
   conversation_variables: []
   environment_variables: []
@@ -100,7 +100,7 @@ workflow:
         title: 开始
         type: start
         variables: []
-      height: 53
+      height: 54
       id: '1763622725916'
       position:
         x: 80
@@ -112,7 +112,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 243
+      width: 244
     - data:
         context:
           enabled: false
@@ -160,10 +160,10 @@ workflow:
             size: 10
         model:
           completion_params:
-            enable_thinking: true
+            enable_thinking: false
             temperature: 0.7
           mode: chat
-          name: qwen3-32b
+          name: qwen3.5-flash
           provider: langgenius/tongyi/tongyi
         prompt_template:
         - id: a30a0861-5a39-4698-b5b3-b419413869e2
@@ -210,7 +210,7 @@ workflow:
         variables: []
         vision:
           enabled: false
-      height: 89
+      height: 90
       id: llm
       position:
         x: 680
@@ -222,7 +222,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 243
+      width: 244
     - data:
         answer: '{{#llm.text#}}'
         desc: ''
@@ -230,7 +230,7 @@ workflow:
         title: 直接回复
         type: answer
         variables: []
-      height: 104
+      height: 105
       id: answer
       position:
         x: 980
@@ -242,7 +242,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 243
+      width: 244
     - data:
         desc: ''
         is_array_file: true
@@ -252,7 +252,7 @@ workflow:
         variable_selector:
         - sys
         - files
-      height: 93
+      height: 94
       id: '1766149444074'
       position:
         x: 380
@@ -264,8 +264,8 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 243
+      width: 244
     viewport:
-      x: -87.67757996984403
-      y: 49.8968688748522
+      x: -396.24170085007563
+      y: 78.83274799462072
       zoom: 0.8717582395370637

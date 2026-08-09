@@ -9,9 +9,9 @@ dependencies:
 - current_identifier: null
   type: marketplace
   value:
-    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.1@5cd6896c375b6765252176760ddcae95bdd2466991ff2a8bae4e1cfd1da98e13
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.4@e46b4d846b802cf020e60ca59e0bd4266bc343fdf3a07526a4caa5ea5a18e8d0
 kind: app
-version: 0.4.0
+version: 0.3.1
 workflow:
   conversation_variables: []
   environment_variables: []
@@ -188,8 +188,8 @@ workflow:
             enable_thinking: false
             temperature: 0.7
           mode: chat
-          name: qwen3-32b
-          provider: langgenius/tongyi/tongyi
+          name: Qwen3-32B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
         prompt_template:
         - id: 37a8cada-1882-459c-9321-c0f24a22e96a
           role: system
@@ -262,7 +262,7 @@ workflow:
         variables: []
         vision:
           enabled: false
-      height: 90
+      height: 96
       id: llm
       position:
         x: 675.9054118488807
@@ -278,7 +278,7 @@ workflow:
     - data:
         answer: '{{#1768905043926.merged_markdown#}}'
         desc: ''
-        selected: true
+        selected: false
         title: 直接回复
         type: answer
         variables: []
@@ -290,7 +290,7 @@ workflow:
       positionAbsolute:
         x: 2504.64914225091
         y: 299.6388937035453
-      selected: true
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -447,7 +447,7 @@ workflow:
             enable_thinking: false
             temperature: 0.7
           mode: chat
-          name: qwen3-32b
+          name: qwen3.5-flash
           provider: langgenius/tongyi/tongyi
         prompt_template:
         - id: b2801a2e-929e-498f-9187-524066a01ad9
@@ -513,7 +513,7 @@ workflow:
             "content": "这里是实际生成的文本"
 
             }'
-        selected: false
+        selected: true
         structured_output:
           schema:
             additionalProperties: false
@@ -556,7 +556,7 @@ workflow:
       positionAbsolute:
         x: 1781.557573918712
         y: 364.6388937035453
-      selected: false
+      selected: true
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -682,6 +682,6 @@ workflow:
       type: custom
       width: 244
     viewport:
-      x: 24.814044881161408
-      y: 98.07729344584897
-      zoom: 0.6597540000452959
+      x: -839.1100802288433
+      y: 38.32866782477487
+      zoom: 0.6582314042776012
