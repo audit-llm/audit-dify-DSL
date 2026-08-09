@@ -117,10 +117,12 @@ tbody tr:last-child td { border-bottom: none; }
   font-size: 12px;
   white-space: nowrap;
 }
-.status-same { background: #e7f6ec; color: var(--green); }
-.status-a_newer, .status-b_newer { background: #fff4e5; color: var(--amber); }
-.status-missing_a, .status-missing_b { background: #fdeeee; color: var(--red); }
+.status-same, .status-synced { background: #e7f6ec; color: var(--green); }
+.status-a_ahead, .status-b_ahead, .status-a_newer, .status-b_newer { background: #fff4e5; color: var(--amber); }
+.status-conflict, .status-diverge, .status-missing_a, .status-missing_b { background: #fdeeee; color: var(--red); }
 .status-unknown { background: #eef1f4; color: var(--muted); }
+
+#compare-views { overflow-x: auto; }
 
 .log {
   margin: 0;

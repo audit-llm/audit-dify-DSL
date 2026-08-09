@@ -10,7 +10,7 @@
   <header class="topbar">
     <div>
       <h1>Dify 工作流版本同步台</h1>
-      <p class="subtitle">以本仓库为版本中心，一键导出并按“上次更改时间”对比各环境。</p>
+      <p class="subtitle">以本仓库为版本中心：dev/prod 可看作两个分支，用 Dify 内容 hash 追踪共同对齐点（merge-base）。</p>
     </div>
     <div class="top-actions">
       <span id="git-chip" class="chip">仓库状态加载中…</span>
@@ -26,7 +26,7 @@
     <section class="panel">
       <div class="panel-head">
         <h2>跨环境时间对比</h2>
-        <span class="hint">时间来自各环境 Dify 工作流草稿的最后修改时间，导出时写入仓库元数据。</span>
+        <span class="hint">状态优先按 Dify 草稿 hash 与同步基线判断，时间仅作辅助。</span>
       </div>
       <div id="compare-views"></div>
     </section>

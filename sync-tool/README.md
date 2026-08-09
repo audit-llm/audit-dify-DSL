@@ -25,7 +25,7 @@ Dify 里手动导入，符合“导出需人工触发”的边界。
 
 - Python 3.10+，仅使用标准库，无需安装依赖。
 - 能访问目标 Dify 的 Console API（`/console/api/login`、`/apps`、
-  `/apps/{id}/workflows/draft`、`/apps/{id}/export`），Dify 1.7.2 已实测。
+  `/apps/{id}/workflows`、`/apps/{id}/export`），Dify 1.7.2 已实测。
 
 ## 快速开始
 
@@ -51,6 +51,9 @@ python3 -m dify_sync.cli compare
 
 # 用仓库现有 yml 生成无 Dify 时间信息的基线元数据（适合首次初始化另一环境）
 python3 -m dify_sync.cli init-metadata prod
+
+# 把某工作流当前草稿 hash 记为共同同步基线（生产导入验证后执行）
+python3 -m dify_sync.cli sync-mark 数据分析工作流1 dev --note "生产已导入并验证"
 ```
 
 ## 仓库里新增了什么
@@ -63,16 +66,48 @@ sync-tool/
   config.json           本地真实配置（被 .gitignore 忽略，不要提交）
   tests/                离线测试（内置假 Dify）
 metadata/
-  dev.json / prod.json  各环境工作流清单与 Dify 更新时间（提交，作为版本中心数据）
+  dev.json / prod.json  各环境工作流清单、hash、版本历史（提交）
+  sync-state.json       各工作流同步基线 synced_hash（提交，类似 git merge-base）
 ```
+
+页面每张环境卡片里的“已记基线”指该环境草稿 hash 与 `sync-state.json` 中基线
+一致的工作流数；“两侧对齐”指所有环境对中两侧 hash 都等于同一基线的工作流数。
+后者才真正代表 dev/prod 当前都停在同一内容上。
 
 ## 时间语义
 
-- 每个环境导出时，从 Dify 的 `workflows/draft` 读取该应用草稿的
-  `updated_at`（epoch 秒），写入 `metadata/<env>.json`。
+- 每个环境导出时，从 Dify 的 `/apps/{id}/workflows` 读取草稿与历史发布版本：
+  `draft_hash`（草稿内容指纹）、`published_hash`、`published_at`、
+  `version_count`、`version_history`，连同草稿 `updated_at` 写入
+  `metadata/<env>.json`。
+- 导出语义：`/apps/{id}/export` 输出的 DSL 始终对应**当前草稿**，不是历史发布
+  版本。`/apps/{id}/workflows` 里除 `draft` 外的条目只用于记录历史发布元数据
+  （hash、发布时间、版本号），不参与 DSL 内容判断。
+- 判断“内容是否真的变了”优先用 Dify 的 `hash`（对图内容敏感，不受
+  `selected` 等画布 UI 噪音影响），时间只作为辅助信息。
 - 跨环境对比只比较仓库里两边的元数据，**不联网**；只有“一键导出”需要联网。
 - 若某环境从未导出（例如生产网络尚未跑过工具），对比会提示“一侧未记录 Dify
   更新时间”，这符合“仓库只记录人工触发过的导出”的约定。
+
+## 版本对齐模型（借 git 概念）
+
+把 `dev`、`prod` 看作两个长期分支，仓库是版本中心。每个工作流可以有一个
+`synced_hash`，相当于 git 的 merge-base：
+
+- `synced`：两侧草稿 hash 都与同步基线一致，已对齐。
+- `a_ahead` / `b_ahead`：某侧相对同步基线领先，是待迁移候选（类似 cherry-pick）。
+- `conflict`：两侧都偏离同步基线且内容不同，需要人工合并。
+- `diverge`：还没有同步基线，两侧内容已经不同，需要先确认基线。
+- `same`：两侧内容一致，但相对同步基线领先或是首次记录，可以“标记对齐”。
+
+对齐基线与各环境导出解耦，单独存放在 `metadata/sync-state.json`。生产环境
+导入并验证某个版本后，在页面点“标记对齐”或执行：
+
+```bash
+python3 -m dify_sync.cli sync-mark 数据分析工作流1 dev --note "生产已导入并验证"
+```
+
+之后对比逻辑就会按 `synced_hash` 给出领先/冲突判断，而不是简单看谁的时间新。
 
 ## 安全说明
 

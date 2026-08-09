@@ -115,6 +115,28 @@ class DifyConsoleClient:
         ts = resp.get("updated_at")
         return ts if isinstance(ts, (int, float)) else None
 
+    def get_draft(self, app_id: str) -> dict:
+        """读取草稿元数据（含 content hash）；失败返回空 dict。"""
+        try:
+            return self._request("GET", f"/apps/{app_id}/workflows/draft") or {}
+        except DifyApiError:
+            return {}
+
+    def list_workflow_versions(self, app_id: str, limit: int = 100) -> list[dict]:
+        """读取草稿与历史发布版本（Dify 版本历史接口）。"""
+        versions: list[dict] = []
+        page = 1
+        while True:
+            resp = self._request(
+                "GET", f"/apps/{app_id}/workflows?page={page}&limit={limit}"
+            )
+            items = resp.get("items") or []
+            versions.extend(items)
+            if not resp.get("has_more") or not items:
+                break
+            page += 1
+        return versions
+
     def export_app(self, app_id: str) -> str:
         suffix = "" if self.include_secret else "?include_secret=false"
         resp = self._request("GET", f"/apps/{app_id}/export{suffix}")

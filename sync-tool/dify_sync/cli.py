@@ -6,7 +6,13 @@ import sys
 
 from .config import load_config, repo_root
 from .exporter import export_environment
-from .store import compare_environments, init_metadata_from_repo, load_metadata
+from .store import (
+    compare_environments,
+    init_metadata_from_repo,
+    load_metadata,
+    load_sync_state,
+    mark_workflow_synced,
+)
 
 
 def _load_cfg():
@@ -45,12 +51,32 @@ def cmd_compare(args) -> int:
         m = load_metadata(repo, key)
         m["label"] = cfg.environments[key].name
         meta[key] = m
+    sync_state = load_sync_state(repo)
     pairs = list(zip(keys, keys[1:])) if args.all_pairs else [(keys[0], keys[1])]
     output = {"envs": {k: v["label"] for k, v in meta.items()}}
     for a, b in pairs:
-        rows, warnings = compare_environments(meta[a], meta[b], a, b)
+        rows, warnings = compare_environments(
+            meta[a], meta[b], a, b, repo=repo, sync_state=sync_state
+        )
         output[f"{a}_{b}"] = {"rows": rows, "warnings": warnings}
     print(json.dumps(output, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_sync_mark(args) -> int:
+    cfg = _load_cfg()
+    if args.env not in cfg.environments:
+        print(f"未知环境: {args.env}，可用: {','.join(cfg.environments)}", file=sys.stderr)
+        return 2
+    repo = repo_root()
+    meta = load_metadata(repo, args.env)
+    record = meta.get("apps", {}).get(args.name)
+    draft_hash = (record or {}).get("draft_hash")
+    if not draft_hash:
+        print(f"「{args.name}」在 {args.env} 没有可用的内容 hash，请先导出该环境", file=sys.stderr)
+        return 2
+    mark_workflow_synced(repo, args.name, draft_hash, args.env, args.note or "")
+    print(f"已把「{args.name}」的 {draft_hash[:12]}... 记为同步基线（来源 {args.env}）")
     return 0
 
 
@@ -84,6 +110,12 @@ def build_parser() -> argparse.ArgumentParser:
     p_init = sub.add_parser("init-metadata", help="用仓库现有文件生成无时间信息的基线元数据")
     p_init.add_argument("env")
     p_init.set_defaults(func=cmd_init_metadata)
+
+    p_sync_mark = sub.add_parser("sync-mark", help="把某工作流当前草稿 hash 记为共同同步基线")
+    p_sync_mark.add_argument("name")
+    p_sync_mark.add_argument("env")
+    p_sync_mark.add_argument("--note", default="")
+    p_sync_mark.set_defaults(func=cmd_sync_mark)
 
     p_serve = sub.add_parser("serve", help="启动本地可视化管理页面")
     p_serve.add_argument("--host", default="127.0.0.1")
