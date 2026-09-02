@@ -231,6 +231,46 @@
       "file": "environments/prod/测绘院疑点清单.yml",
       "sha256": "afed8ad714398416258a38caeeb8fca5f9450d43fb7d5328ebf894f1c87c8c21",
       "source": "repo-baseline"
+    },
+    "综合报告-前言": {
+      "app_id": null,
+      "name": "综合报告-前言",
+      "mode": null,
+      "dify_updated_at": null,
+      "exported_at": null,
+      "file": "environments/prod/综合报告-前言.yml",
+      "sha256": "e9e3c3ef1eb7433246c334c5695ef91e366fe8b55e1c3210baf593e7444b5978",
+      "source": "repo-baseline"
+    },
+    "综合报告-基本情况": {
+      "app_id": null,
+      "name": "综合报告-基本情况",
+      "mode": null,
+      "dify_updated_at": null,
+      "exported_at": null,
+      "file": "environments/prod/综合报告-基本情况.yml",
+      "sha256": "b72711afea1eac0d2a7833f0f4d53410e096d43744df37815aa7dc19cf00bb86",
+      "source": "repo-baseline"
+    },
+    "综合报告-主要问题": {
+      "app_id": null,
+      "name": "综合报告-主要问题",
+      "mode": null,
+      "dify_updated_at": null,
+      "exported_at": null,
+      "file": "environments/prod/综合报告-主要问题.yml",
+      "sha256": "91331c134e8dadac587fa01d562039e906c21dc19c7e13242547d5a8df8890e7",
+      "source": "repo-baseline"
+    },
+    "综合报告-审计建议": {
+      "app_id": null,
+      "name": "综合报告-审计建议",
+      "mode": null,
+      "dify_updated_at": null,
+      "exported_at": null,
+      "file": "environments/prod/综合报告-审计建议.yml",
+      "sha256": "91ea350ea432b44eec6e57cf0ecf05e0371a4621d98c0a868202a95b5daf27f0",
+      "source": "repo-baseline"
     }
   }
 }

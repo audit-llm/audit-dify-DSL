@@ -1,7 +1,7 @@
 {
   "env": "dev",
   "label": "开发环境",
-  "updated_at": "2026-08-10T04:34:24+08:00",
+  "updated_at": "2026-09-02T03:58:35+08:00",
   "apps": {
     "数据分析工作流1": {
       "app_id": "04661175-c23a-40f9-ac73-59ac0ee690a4",
@@ -1285,6 +1285,174 @@
           "hash": "6e03b8bbf45b3fedd1cabf3a6a20aa4116765cf32ebee9803372818b48e8a7c4",
           "created_at": 1785743812,
           "updated_at": 1785743812,
+          "created_by": "admin",
+          "created_by_email": "admin@sjt.com",
+          "updated_by": null,
+          "marked_name": "",
+          "marked_comment": ""
+        }
+      ]
+    },
+    "综合报告-前言": {
+      "app_id": "ddff7fb1-db2e-4322-a439-486dda58b94c",
+      "name": "综合报告-前言",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1788289660,
+      "exported_at": "2026-09-02T03:58:35+08:00",
+      "file": "environments/dev/综合报告-前言.yml",
+      "sha256": "01e8427be322658edbb2479ed1cb0214ea76e72a7daa8503af12c84d33f82644",
+      "draft_hash": "f39e58a01863e12f8154f7f5c7f851e0290e7809dce71a1158098acbc09eab4f",
+      "published_hash": "f39e58a01863e12f8154f7f5c7f851e0290e7809dce71a1158098acbc09eab4f",
+      "published_at": 1788292441,
+      "published_version": "2026-09-01 19:54:01.586775",
+      "published_version_id": "83b7d7e4-23ae-402c-9706-fe4401a238d3",
+      "draft_matches_published": true,
+      "version_count": 1,
+      "version_history": [
+        {
+          "version": "draft",
+          "id": "aa15cb26-dba6-4c90-a30b-57ee3460a69a",
+          "hash": "f39e58a01863e12f8154f7f5c7f851e0290e7809dce71a1158098acbc09eab4f",
+          "created_at": 1788289657,
+          "updated_at": 1788289660,
+          "created_by": "admin",
+          "created_by_email": "admin@sjt.com",
+          "updated_by": "admin",
+          "marked_name": "",
+          "marked_comment": ""
+        },
+        {
+          "version": "2026-09-01 19:54:01.586775",
+          "id": "83b7d7e4-23ae-402c-9706-fe4401a238d3",
+          "hash": "f39e58a01863e12f8154f7f5c7f851e0290e7809dce71a1158098acbc09eab4f",
+          "created_at": 1788292441,
+          "updated_at": 1788292441,
+          "created_by": "admin",
+          "created_by_email": "admin@sjt.com",
+          "updated_by": null,
+          "marked_name": "",
+          "marked_comment": ""
+        }
+      ]
+    },
+    "综合报告-基本情况": {
+      "app_id": "1c272529-e948-4fd2-bfc1-c7e6251b7f5b",
+      "name": "综合报告-基本情况",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1788289651,
+      "exported_at": "2026-09-02T03:58:35+08:00",
+      "file": "environments/dev/综合报告-基本情况.yml",
+      "sha256": "c1a996a38737603e9cfbfde2013a464b7be7cf7e6bdce1850f7d1fa5bedcf644",
+      "draft_hash": "de7e17e91cb69ad658e0d951378267280ff977d2f687144330a770f6ed077746",
+      "published_hash": "de7e17e91cb69ad658e0d951378267280ff977d2f687144330a770f6ed077746",
+      "published_at": 1788292442,
+      "published_version": "2026-09-01 19:54:02.293888",
+      "published_version_id": "e58f28ea-a5a5-4d42-8272-bba47df8aeff",
+      "draft_matches_published": true,
+      "version_count": 1,
+      "version_history": [
+        {
+          "version": "draft",
+          "id": "43e52710-c9d9-4f1d-b124-da65a79ed68f",
+          "hash": "de7e17e91cb69ad658e0d951378267280ff977d2f687144330a770f6ed077746",
+          "created_at": 1788289634,
+          "updated_at": 1788289651,
+          "created_by": "admin",
+          "created_by_email": "admin@sjt.com",
+          "updated_by": "admin",
+          "marked_name": "",
+          "marked_comment": ""
+        },
+        {
+          "version": "2026-09-01 19:54:02.293888",
+          "id": "e58f28ea-a5a5-4d42-8272-bba47df8aeff",
+          "hash": "de7e17e91cb69ad658e0d951378267280ff977d2f687144330a770f6ed077746",
+          "created_at": 1788292442,
+          "updated_at": 1788292442,
+          "created_by": "admin",
+          "created_by_email": "admin@sjt.com",
+          "updated_by": null,
+          "marked_name": "",
+          "marked_comment": ""
+        }
+      ]
+    },
+    "综合报告-主要问题": {
+      "app_id": "abbcc2d9-1efc-43e3-9049-9373d6437c08",
+      "name": "综合报告-主要问题",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1788289731,
+      "exported_at": "2026-09-02T03:58:35+08:00",
+      "file": "environments/dev/综合报告-主要问题.yml",
+      "sha256": "d81bd4def8cb4e9a1185a01ebf1b88bd560ec248b76127373833a3f3adea8a12",
+      "draft_hash": "e92a9ab4bf8413620d006011f53da029ee776c70d4144804136bc7c51a52edb6",
+      "published_hash": "e92a9ab4bf8413620d006011f53da029ee776c70d4144804136bc7c51a52edb6",
+      "published_at": 1788292442,
+      "published_version": "2026-09-01 19:54:02.916114",
+      "published_version_id": "b0b08170-188a-44aa-8085-eb15a95f9f85",
+      "draft_matches_published": true,
+      "version_count": 1,
+      "version_history": [
+        {
+          "version": "draft",
+          "id": "9ef9b450-d8af-496e-85d3-cad855097f03",
+          "hash": "e92a9ab4bf8413620d006011f53da029ee776c70d4144804136bc7c51a52edb6",
+          "created_at": 1788289687,
+          "updated_at": 1788289731,
+          "created_by": "admin",
+          "created_by_email": "admin@sjt.com",
+          "updated_by": "admin",
+          "marked_name": "",
+          "marked_comment": ""
+        },
+        {
+          "version": "2026-09-01 19:54:02.916114",
+          "id": "b0b08170-188a-44aa-8085-eb15a95f9f85",
+          "hash": "e92a9ab4bf8413620d006011f53da029ee776c70d4144804136bc7c51a52edb6",
+          "created_at": 1788292442,
+          "updated_at": 1788292442,
+          "created_by": "admin",
+          "created_by_email": "admin@sjt.com",
+          "updated_by": null,
+          "marked_name": "",
+          "marked_comment": ""
+        }
+      ]
+    },
+    "综合报告-审计建议": {
+      "app_id": "461acb6e-5ed1-436f-aa4d-770b94181f7f",
+      "name": "综合报告-审计建议",
+      "mode": "advanced-chat",
+      "dify_updated_at": 1788289681,
+      "exported_at": "2026-09-02T03:58:35+08:00",
+      "file": "environments/dev/综合报告-审计建议.yml",
+      "sha256": "243bc36cea6901840657fe40e19f3ffcae7b6574cedb36c552d991aaea3128ab",
+      "draft_hash": "539c2900d0afb20a6b46d809a3c20000f85aac26919694ef277b60225c9a3c34",
+      "published_hash": "539c2900d0afb20a6b46d809a3c20000f85aac26919694ef277b60225c9a3c34",
+      "published_at": 1788292443,
+      "published_version": "2026-09-01 19:54:03.544737",
+      "published_version_id": "20aae159-a3c4-4e10-ac56-e3c26f1b1c3e",
+      "draft_matches_published": true,
+      "version_count": 1,
+      "version_history": [
+        {
+          "version": "draft",
+          "id": "eae15c35-4486-477f-9475-e008dddb4362",
+          "hash": "539c2900d0afb20a6b46d809a3c20000f85aac26919694ef277b60225c9a3c34",
+          "created_at": 1788289680,
+          "updated_at": 1788289681,
+          "created_by": "admin",
+          "created_by_email": "admin@sjt.com",
+          "updated_by": "admin",
+          "marked_name": "",
+          "marked_comment": ""
+        },
+        {
+          "version": "2026-09-01 19:54:03.544737",
+          "id": "20aae159-a3c4-4e10-ac56-e3c26f1b1c3e",
+          "hash": "539c2900d0afb20a6b46d809a3c20000f85aac26919694ef277b60225c9a3c34",
+          "created_at": 1788292443,
+          "updated_at": 1788292443,
           "created_by": "admin",
           "created_by_email": "admin@sjt.com",
           "updated_by": null,

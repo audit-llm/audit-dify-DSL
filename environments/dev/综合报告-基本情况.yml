@@ -1,0 +1,240 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 综合报告-基本情况
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.4@e46b4d846b802cf020e60ca59e0bd4266bc343fdf3a07526a4caa5ea5a18e8d0
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: llm
+      id: 1787000000002-llm
+      source: '1787000000002'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: project_name
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: project_name
+        - label: audit_year
+          max_length: 48
+          options: []
+          required: false
+          type: text-input
+          variable: audit_year
+        - label: description
+          max_length: 255
+          options: []
+          required: false
+          type: text-input
+          variable: description
+        - label: audited_unit
+          max_length: 255
+          options: []
+          required: false
+          type: text-input
+          variable: audited_unit
+        - label: region
+          max_length: 48
+          options: []
+          required: false
+          type: text-input
+          variable: region
+      height: 194
+      id: '1787000000002'
+      position:
+        x: 81
+        y: 282
+      positionAbsolute:
+        x: 81
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - sys
+          - query
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-flash
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: ee7ef227-44f1-438e-8eb0-709badda65b1
+          role: system
+          text: 你是湖北省审计厅自然资源处综合报告起草专家，负责把各地区报送的自然资源资产基础数据规范整理为综合报告“基本情况”。你只负责文本组织与格式，所有数据原样来自用户粘贴内容，禁止改动或编造。
+        - id: 0382cdee-2cf4-46bf-99ef-a0ddca9dc29a
+          role: user
+          text: '请整理综合报告的“一、基本情况”部分。
+
+
+            项目名称：{{#1787000000002.project_name#}}
+
+            审计年度（项目字段）：{{#1787000000002.audit_year#}}
+
+            被审计单位：{{#1787000000002.audited_unit#}}
+
+            区域：{{#1787000000002.region#}}
+
+            项目说明：{{#1787000000002.description#}}
+
+
+            [用户粘贴的自然资源基础数据素材]
+
+            {{#sys.query#}}
+
+
+            文本形式要求：
+
+            1. 固定以“一、基本情况”开头；
+
+            2. 按用户素材的维度逐项陈述（如国土面积、河流湖泊、水库、自然保护地；耕地、基本农田、生态保护红线、水资源、森林等），保留原文数据与对比口径；
+
+            3. 以简洁公文叙述呈现，中文标点，不使用 markdown。
+
+
+            严格规则：
+
+            - 所有面积、数量、百分比与统计口径必须与用户素材逐字一致，不得换算、四舍五入、补全或编造；
+
+            - 素材缺失的维度用【待补充：×××】标注，不要杜撰数字；
+
+            - 若素材含多年度对比，请按原文保留。'
+        selected: false
+        title: 基本情况整理
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: llm
+      position:
+        x: 388
+        y: 282
+      positionAbsolute:
+        x: 388
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: true
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 105
+      id: answer
+      position:
+        x: 684
+        y: 282
+      positionAbsolute:
+        x: 684
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 13.5
+      y: 17
+      zoom: 1
