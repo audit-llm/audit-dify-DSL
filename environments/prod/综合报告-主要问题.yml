@@ -115,7 +115,7 @@ workflow:
           required: false
           type: text-input
           variable: region
-      height: 168
+      height: 193
       id: '1787000000003'
       position:
         x: 81
@@ -127,7 +127,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         context:
           enabled: true
@@ -211,7 +211,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         answer: '{{#llm.text#}}'
         desc: ''
@@ -231,7 +231,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     viewport:
       x: 13.5
       y: 17

@@ -1,0 +1,935 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: Chunkdemo
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: langgenius/openai_api_compatible:0.0.30@31e293f39e1ce22dd80546de27b36ce35db5a767e86e800c36fff6f53cdfc118
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1774501826854-source-1774502095532-target
+      selected: false
+      source: '1774501826854'
+      sourceHandle: source
+      target: '1774502095532'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: document-extractor
+        targetType: code
+      id: 1774502095532--1774502123018-target
+      selected: false
+      source: '1774502095532'
+      sourceHandle: source
+      target: '1774502123018'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: iteration
+      id: 1774502123018-source-1774502913560-target
+      selected: false
+      source: '1774502123018'
+      sourceHandle: source
+      target: '1774502913560'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1774502913560'
+        sourceType: iteration-start
+        targetType: llm
+      id: 1774502913560start-source-1774503201927-target
+      selected: false
+      source: 1774502913560start
+      sourceHandle: source
+      target: '1774503201927'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1774502913560'
+        sourceType: iteration-start
+        targetType: llm
+      id: 1774506214584start-source-1774506214584217745062145850-target
+      selected: false
+      source: 1774506214584start
+      sourceHandle: source
+      target: '1774506214584217745062145850'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1774501826854-source-17745062145830-target
+      selected: false
+      source: '1774501826854'
+      sourceHandle: source
+      target: '17745062145830'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: document-extractor
+        targetType: code
+      id: 17745062145830-source-17745062145841-target
+      selected: false
+      source: '17745062145830'
+      sourceHandle: source
+      target: '17745062145841'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: iteration
+      id: 17745062145841-source-17745062145842-target
+      selected: false
+      source: '17745062145841'
+      sourceHandle: source
+      target: '17745062145842'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: iteration
+        targetType: llm
+      id: 1774502913560-source-1774506380524-target
+      source: '1774502913560'
+      sourceHandle: source
+      target: '1774506380524'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: iteration
+        targetType: llm
+      id: 17745062145842-source-1774506380524-target
+      selected: false
+      source: '17745062145842'
+      sourceHandle: source
+      target: '1774506380524'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1774506380524-source-1774507301786-target
+      source: '1774506380524'
+      sourceHandle: source
+      target: '1774507301786'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1774502913560'
+        sourceType: llm
+        targetType: code
+      id: 1774503201927-source-1774536828979-target
+      source: '1774503201927'
+      sourceHandle: source
+      target: '1774536828979'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '17745062145842'
+        sourceType: llm
+        targetType: code
+      id: 1774506214584217745062145850-source-1774536832113-target
+      source: '1774506214584217745062145850'
+      sourceHandle: source
+      target: '1774536832113'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: pdf_a
+          max_length: 48
+          options: []
+          required: true
+          type: file
+          variable: pdf_a
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: pdf_b
+          max_length: 48
+          options: []
+          required: true
+          type: file
+          variable: pdf_b
+      height: 114
+      id: '1774501826854'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        is_array_file: false
+        selected: false
+        title: 文档提取器
+        type: document-extractor
+        variable_selector:
+        - '1774501826854'
+        - pdf_a
+      height: 93
+      id: '1774502095532'
+      position:
+        x: 383
+        y: 282
+      positionAbsolute:
+        x: 383
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "def main(text: str) -> dict:\n    text = str(text) if text else \"\"\
+          \n    text_length = len(text)\n    \n    if not text.strip():\n        return\
+          \ {\"chunks\": [], \"text_length\": 0}\n        \n    # 【核心修改 1：降低分块大小，防超时，提精度】\n\
+          \    # 将 4000 降为 1200。这样 32B 模型处理每一块只需十几秒，绝不超时，且找错别字极其精细。\n    chunk_size\
+          \ = 4000  \n    overlap = 400      \n    \n    # 【核心修改 2：调整单页字符估算补偿】\n \
+          \   # 标书里有大量表格、图片、留白，它们占物理页码但不占纯文本字数。\n    # 调低单页字符数到 750，估算出的页码会更贴近真实的\
+          \ PDF 页码。\n    chars_per_page = 750 \n    \n    chunks = []\n    start =\
+          \ 0\n    \n    while start < text_length:\n        end = min(start + chunk_size,\
+          \ text_length)\n        chunk_text = text[start:end]\n        \n       \
+          \ # 1. 预估物理页码\n        start_page = int(start / chars_per_page) + 1\n  \
+          \      end_page = int(end / chars_per_page) + 1\n        \n        # 【核心修改\
+          \ 3：引入绝对定位（全文百分比）】\n        # 无论 PDF 怎么排版，百分比是绝对的。审计员找不到时直接拉动 PDF 滚动条到对应百分比位置。\n\
+          \        percent_start = int((start / text_length) * 100)\n        percent_end\
+          \ = int((end / text_length) * 100)\n        \n        # 组装双轨坐标\n       \
+          \ page_locator = f\"[全文进度 {percent_start}%-{percent_end}% | 预估第 {start_page}-{end_page}\
+          \ 页]\"\n        \n        chunks.append({\n            \"page_locator\"\
+          : page_locator,\n            \"content\": chunk_text\n        })\n     \
+          \   start += (chunk_size - overlap)\n        \n    return {\n        \"\
+          chunks\": chunks,\n        \"text_length\": text_length\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          chunks:
+            children: null
+            type: array[object]
+          text_length:
+            children: null
+            type: number
+        selected: false
+        title: 分块1
+        type: code
+        variables:
+        - value_selector:
+          - '1774502095532'
+          - text
+          value_type: string
+          variable: text
+      height: 52
+      id: '1774502123018'
+      position:
+        x: 686
+        y: 282
+      positionAbsolute:
+        x: 686
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 177
+        is_parallel: true
+        iterator_input_type: array[object]
+        iterator_selector:
+        - '1774502123018'
+        - chunks
+        output_selector:
+        - '1774536828979'
+        - result
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1774502913560start
+        title: 迭代
+        type: iteration
+        width: 692
+      height: 177
+      id: '1774502913560'
+      position:
+        x: 990
+        y: 282
+      positionAbsolute:
+        x: 990
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 692
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1774502913560start
+      parentId: '1774502913560'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 1014
+        y: 350
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1774502913560'
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.1
+          mode: chat
+          name: Qwen3.5-27B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 1ffd7492-5b71-4574-ae6e-31fcdb45beba
+          role: system
+          text: "你是一个专业的审计取证专家。你的任务是从文本中提取核心“文本DNA”和数据指纹。\n\n【取证规则 - 严禁捏造，但需敏锐】：\n\
+            1. abnormal_typos (异常与痕迹)：不仅提取错别字，如果发现“异常生僻的词汇”、“特殊的排版缩进”、“中英文标点非正常混用”，也必须完整提取其原句和页码。若全段无异常，必须输出\
+            \ []。\n2. technical_parameters (特征数据与个性表述)：\n   - 提取所有具体的数值（如尺寸、温度、比例、天数）。\n\
+            3. 身份打码：你必须在所有提取结果的 source_file 字段中，强制、死板地填写 \"中标单位A\"，绝不允许更改！\n   - 【重点新增】：提取极具个性化的“长难句”或“非标准化的工艺描述”（字数在20-50字之间）。哪怕没有错别字，只要这句话不像通用的官方废话，就提取出来作为比对指纹！\n\
+            \   - 必须原封不动复制原句，并附上 page_locator。若无，输出 []。\n\n⚠️ 绝对不可自己创造词汇！你的提取内容必须能在原文中通过\
+            \ Ctrl+F 搜索到！"
+        - id: a823a63c-6329-4077-a5cb-e53b81e1c002
+          role: user
+          text: 请提取以下片段特征{{#1774502913560.item#}}
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              abnormal_typos:
+                description: 错别字、标点异常、明显语病。若无则输出空数组 []。
+                items:
+                  properties:
+                    error_word:
+                      description: 错别字本身
+                      type: string
+                    original_sentence:
+                      description: 包含该错别字的完整原句（需完全照抄）
+                      type: string
+                    page_locator:
+                      description: 传入的 page_locator 变量
+                      type: string
+                    source_file:
+                      description: 来源文件身份标识
+                      type: string
+                  required:
+                  - source_file
+                  - error_word
+                  - original_sentence
+                  - page_locator
+                  type: object
+                type: array
+              technical_parameters:
+                description: 非国标强制的、带有具体数值的技术参数、长难句指纹。若无则输出空数组 []。
+                items:
+                  properties:
+                    page_locator:
+                      type: string
+                    parameter:
+                      description: 具体数值与指标或个性化长句
+                      type: string
+                    source_file:
+                      description: 来源文件身份标识
+                      type: string
+                  required:
+                  - source_file
+                  - parameter
+                  - page_locator
+                  type: object
+                type: array
+            required:
+            - abnormal_typos
+            - technical_parameters
+            type: object
+        structured_output_enabled: false
+        title: LLM map
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '1774503201927'
+      parentId: '1774502913560'
+      position:
+        x: 128
+        y: 66.68049208922707
+      positionAbsolute:
+        x: 1118
+        y: 348.6804920892271
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+      zIndex: 1002
+    - data:
+        desc: ''
+        is_array_file: false
+        selected: false
+        title: 文档提取器 (1)
+        type: document-extractor
+        variable_selector:
+        - '1774501826854'
+        - pdf_b
+      height: 93
+      id: '17745062145830'
+      position:
+        x: 374.7957839041063
+        y: 517.3103311239213
+      positionAbsolute:
+        x: 374.7957839041063
+        y: 517.3103311239213
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "def main(text: str) -> dict:\n    text = str(text) if text else \"\"\
+          \n    text_length = len(text)\n    \n    if not text.strip():\n        return\
+          \ {\"chunks\": [], \"text_length\": 0}\n        \n    # 【核心修改 1：降低分块大小，防超时，提精度】\n\
+          \    # 将 4000 降为 1200。这样 32B 模型处理每一块只需十几秒，绝不超时，且找错别字极其精细。\n    chunk_size\
+          \ = 4000  \n    overlap = 400      \n    \n    # 【核心修改 2：调整单页字符估算补偿】\n \
+          \   # 标书里有大量表格、图片、留白，它们占物理页码但不占纯文本字数。\n    # 调低单页字符数到 750，估算出的页码会更贴近真实的\
+          \ PDF 页码。\n    chars_per_page = 750 \n    \n    chunks = []\n    start =\
+          \ 0\n    \n    while start < text_length:\n        end = min(start + chunk_size,\
+          \ text_length)\n        chunk_text = text[start:end]\n        \n       \
+          \ # 1. 预估物理页码\n        start_page = int(start / chars_per_page) + 1\n  \
+          \      end_page = int(end / chars_per_page) + 1\n        \n        # 【核心修改\
+          \ 3：引入绝对定位（全文百分比）】\n        # 无论 PDF 怎么排版，百分比是绝对的。审计员找不到时直接拉动 PDF 滚动条到对应百分比位置。\n\
+          \        percent_start = int((start / text_length) * 100)\n        percent_end\
+          \ = int((end / text_length) * 100)\n        \n        # 组装双轨坐标\n       \
+          \ page_locator = f\"[全文进度 {percent_start}%-{percent_end}% | 预估第 {start_page}-{end_page}\
+          \ 页]\"\n        \n        chunks.append({\n            \"page_locator\"\
+          : page_locator,\n            \"content\": chunk_text\n        })\n     \
+          \   start += (chunk_size - overlap)\n        \n    return {\n        \"\
+          chunks\": chunks,\n        \"text_length\": text_length\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          chunks:
+            children: null
+            type: array[object]
+          text_length:
+            children: null
+            type: number
+        selected: false
+        title: 分块2
+        type: code
+        variables:
+        - value_selector:
+          - '17745062145830'
+          - text
+          value_type: string
+          variable: text
+      height: 52
+      id: '17745062145841'
+      position:
+        x: 686
+        y: 517.3103311239213
+      positionAbsolute:
+        x: 686
+        y: 517.3103311239213
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 177
+        is_parallel: true
+        iterator_input_type: array[object]
+        iterator_selector:
+        - '17745062145841'
+        - chunks
+        output_selector:
+        - '1774536832113'
+        - result
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1774506214584start
+        title: 迭代 (1)
+        type: iteration
+        width: 690.6804920892271
+      height: 177
+      id: '17745062145842'
+      position:
+        x: 990
+        y: 517.3103311239213
+      positionAbsolute:
+        x: 990
+        y: 517.3103311239213
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 691
+      zIndex: 1
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '17745062145842'
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.1
+          mode: chat
+          name: Qwen3.5-27B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 1ffd7492-5b71-4574-ae6e-31fcdb45beba
+          role: system
+          text: "你是一个专业的审计取证专家。你的任务是从文本中提取核心“文本DNA”和数据指纹。\n\n【取证规则 - 严禁捏造，但需敏锐】：\n\
+            1. abnormal_typos (异常与痕迹)：不仅提取错别字，如果发现“异常生僻的词汇”、“特殊的排版缩进”、“中英文标点非正常混用”，也必须完整提取其原句和页码。若全段无异常，必须输出\
+            \ []。\n2. technical_parameters (特征数据与个性表述)：\n   - 提取所有具体的数值（如尺寸、温度、比例、天数）。\n\
+            3. 身份打码：你必须在所有提取结果的 source_file 字段中，强制、死板地填写 \"其他单位B\"，绝不允许更改\n   - 【重点新增】：提取极具个性化的“长难句”或“非标准化的工艺描述”（字数在20-50字之间）。哪怕没有错别字，只要这句话不像通用的官方废话，就提取出来作为比对指纹！\n\
+            \   - 必须原封不动复制原句，并附上 page_locator。若无，输出 []。\n\n⚠️ 绝对不可自己创造词汇！你的提取内容必须能在原文中通过\
+            \ Ctrl+F 搜索到！"
+        - id: a823a63c-6329-4077-a5cb-e53b81e1c002
+          role: user
+          text: 请提取以下片段特征{{#17745062145842.item#}}
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              abnormal_typos:
+                description: 错别字、标点异常、明显语病。若无则输出空数组 []。
+                items:
+                  properties:
+                    error_word:
+                      description: 错别字本身
+                      type: string
+                    original_sentence:
+                      description: 包含该错别字的完整原句（需完全照抄）
+                      type: string
+                    page_locator:
+                      description: 传入的 page_locator 变量
+                      type: string
+                    source_file:
+                      description: 来源文件身份标识
+                      type: string
+                  required:
+                  - source_file
+                  - error_word
+                  - original_sentence
+                  - page_locator
+                  type: object
+                type: array
+              technical_parameters:
+                description: 非国标强制的、带有具体数值的技术参数、长难句指纹。若无则输出空数组 []。
+                items:
+                  properties:
+                    page_locator:
+                      type: string
+                    parameter:
+                      description: 具体数值与指标或个性化长句
+                      type: string
+                    source_file:
+                      description: 来源文件身份标识
+                      type: string
+                  required:
+                  - source_file
+                  - parameter
+                  - page_locator
+                  type: object
+                type: array
+            required:
+            - abnormal_typos
+            - technical_parameters
+            type: object
+        structured_output_enabled: false
+        title: LLM map 2
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '1774506214584217745062145850'
+      parentId: '17745062145842'
+      position:
+        x: 126.68049208922707
+        y: 68
+      positionAbsolute:
+        x: 1116.680492089227
+        y: 585.3103311239213
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1774506214584start
+      parentId: '17745062145842'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 1014
+        y: 585.3103311239213
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.1
+          mode: chat
+          name: Qwen3.5-27B
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 500ea298-42bf-4fff-9115-a99b81348223
+          role: system
+          text: '# Role
+
+            你是一名国家级审计署特聘的“反围标串标”数据分析专家，精通文本查重与同源改写侦测。
+
+            我将为你提供【中标单位A】和【其他单位B】经过物理取证的特征数据。请进行深度交叉比对，出具审计核查通报。
+
+
+            # 🕵️‍♂️ 核心侦测逻辑 (重点学习)
+
+            不要局限于100%字面完全一致！作弊者通常会进行掩饰。你需要侦测以下三种“疑似雷同”：
+
+            1. 【同源改写 (洗稿)】：A写“采用人工配合机械开挖”，B写“使用机械结合人工进行开挖”。词汇替换、语序颠倒，但实质工艺与逻辑完全同源，应判定为“疑似同源改写”。
+
+            2. 【规律性调值 (成比例修改)】：A设备的功率是150kw，B是165kw；A的人数是10人，B是11人。如果发现参数存在统一的等比缩放（如都是1.1倍），应判定为“高度疑似人工调标”。
+
+            3. 【罕见特征重合】：即使两句话不完全一样，但都使用了一个极度冷门的工艺名词或犯了类似的排版错误，应判定为“异常重合”。
+
+
+            # Output Format (严格按此 Markdown 表格输出)
+
+
+            ## 📑 投标文件 1V1 穿透审计鉴定报告
+
+            **比对对象：** 中标单位 A vs 投标单位 B
+
+            **篇幅规模核对：** 单位 A 长度 {{length_a}}，单位 B 长度 {{length_b}}。（差异率小于2%为高度可疑模板克隆）
+
+
+            ### 1. 疑似同源改写与话术雷同 (洗稿检测)
+
+            *审计说明：文字表述虽有微调，但核心逻辑、罕见词汇、长句骨架高度一致。*
+
+            | 相似维度 | 单位 A 原句及位置 | 单位 B 原句及位置 | 相似度分析与判定 |
+
+            | :--- | :--- | :--- | :--- |
+
+            | (例: 施工工序描述) | [第X页] (填入原句) | [第Y页] (填入原句) | (例如：语序颠倒，但核心词汇重合度达90%，疑似同源底稿洗稿)
+            |
+
+            | (若无则填未发现) | - | - | - |
+
+
+            ### 2. 核心数据与参数异常关联 (调标检测)
+
+            *审计说明：非强制性数值完全一致，或存在规律性的等比放大/缩小。*
+
+            | 对比项 | 单位 A 参数及位置 | 单位 B 参数及位置 | 审计判定 |
+
+            | :--- | :--- | :--- | :--- |
+
+            | (例: 压实度/工期) | [第X页] (数值) | [第Y页] (数值) | (例如：完全一致 / 或 B为A的准确1.1倍，疑似串标人工调值)
+            |
+
+
+            ### 3. 致命缺陷碰撞 (错别字/排版错误)
+
+            | 异常特征 | 单位 A 证据及位置 | 单位 B 证据及位置 | 判定 |
+
+            | :--- | :--- | :--- | :--- |
+
+            | (填入具体错别字) | [第X页] | [第Y页] | (例如：相同低级错误，铁证) |
+
+
+            ## ⚖️ 审计结论与核查建议
+
+            (基于上述发现，给出一个综合的风险评级【极高/中等可疑/低】，并说明是否属于正常行业的通用表述重合，还是明显的恶意串标痕迹。)'
+        - id: ff6b4c6e-5656-464c-8b10-936074ab6a26
+          role: user
+          text: '<fileA>
+
+            {{#1774502123018.text_length#}}{{#1774502913560.output#}}
+
+            </fileA>
+
+            <fileB>
+
+            {{#17745062145841.text_length#}}{{#17745062145842.output#}}
+
+            </fileB>'
+        selected: false
+        title: LLM Judge
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '1774506380524'
+      position:
+        x: 1796.3240959067682
+        y: 394.9889487436638
+      positionAbsolute:
+        x: 1796.3240959067682
+        y: 394.9889487436638
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1774506380524'
+          - text
+          value_type: string
+          variable: result
+        selected: false
+        title: 结束
+        type: end
+      height: 89
+      id: '1774507301786'
+      position:
+        x: 1773.5515428143945
+        y: 587.1658414211423
+      positionAbsolute:
+        x: 1773.5515428143945
+        y: 587.1658414211423
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "import re\n\ndef main(arg1) -> dict:\n    result = re.sub(r'<think>.*?</think>',\
+          \ '', arg1, flags=re.DOTALL)\n    return {\n        \"result\": result,\n\
+          \    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1774502913560'
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 去除思考
+        type: code
+        variables:
+        - value_selector:
+          - '1774503201927'
+          - text
+          value_type: string
+          variable: arg1
+      height: 52
+      id: '1774536828979'
+      parentId: '1774502913560'
+      position:
+        x: 432
+        y: 66.68049208922707
+      positionAbsolute:
+        x: 1422
+        y: 348.6804920892271
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+      zIndex: 1002
+    - data:
+        code: "import re\n\ndef main(arg1) -> dict:\n    result = re.sub(r'<think>.*?</think>',\
+          \ '', arg1, flags=re.DOTALL)\n    return {\n        \"result\": result,\n\
+          \    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '17745062145842'
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 去除思考
+        type: code
+        variables:
+        - value_selector:
+          - '1774506214584217745062145850'
+          - text
+          value_type: string
+          variable: arg1
+      height: 52
+      id: '1774536832113'
+      parentId: '17745062145842'
+      position:
+        x: 430.6804920892271
+        y: 68.93002040833721
+      positionAbsolute:
+        x: 1420.680492089227
+        y: 586.2403515322585
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+      zIndex: 1002
+    viewport:
+      x: 109.31491297377079
+      y: -126.73504021712824
+      zoom: 0.8663362878479247

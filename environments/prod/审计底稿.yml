@@ -126,7 +126,7 @@ workflow:
     nodes:
     - data:
         desc: ''
-        selected: false
+        selected: true
         title: 开始
         type: start
         variables:
@@ -148,19 +148,19 @@ workflow:
           required: false
           type: paragraph
           variable: audit_finding
-      height: 141
+      height: 140
       id: '1764251725991'
       position:
-        x: 26.98408610368986
+        x: 25.773927199082834
         y: 276.1589345609158
       positionAbsolute:
-        x: 26.98408610368986
+        x: 25.773927199082834
         y: 276.1589345609158
-      selected: false
+      selected: true
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         context:
           enabled: true
@@ -188,13 +188,16 @@ workflow:
             \   - 整改：使用标准术语，具备官方语气。\n3. **语气**：客观、严肃、精炼，符合公文规范。\n\n# Output Format\n\
             请直接输出以下格式内容，不要包含其他寒暄语：\n\n**审计法规依据：**\n上述问题不符合《[法规名称]》第X条“……”的规定。\n\n\
             **审计结论及意见：**\n[责任主体]应[具体指令1]（输出长度为一句话，尽可能简短）"
-        selected: true
+        - id: ee955466-57fd-4965-95a0-bdf72baf929c
+          role: user
+          text: '{{#sys.query#}}'
+        selected: false
         title: LLM-法律依据
         type: llm
         variables: []
         vision:
           enabled: false
-      height: 89
+      height: 88
       id: '1764252044266'
       position:
         x: 288.85714285714295
@@ -202,11 +205,11 @@ workflow:
       positionAbsolute:
         x: 288.85714285714295
         y: 623.8571428571429
-      selected: true
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         dataset_ids:
         - EY7h408TgMQhFRlea+CWc86JDpwi2ymbtbaSyaqtpc9/VYRZ23a00ZegwmoxC3CV
@@ -233,19 +236,19 @@ workflow:
         selected: false
         title: 法律条文检索
         type: knowledge-retrieval
-      height: 91
+      height: 90
       id: '1764488204707'
       position:
-        x: -28.00000000000007
+        x: -28.000000000000057
         y: 623.8571428571429
       positionAbsolute:
-        x: -28.00000000000007
+        x: -28.000000000000057
         y: 623.8571428571429
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         context:
           enabled: false
@@ -279,7 +282,7 @@ workflow:
         variables: []
         vision:
           enabled: false
-      height: 89
+      height: 88
       id: '1764489645462'
       position:
         x: 330.59371870931494
@@ -291,7 +294,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         code: "import re\n\ndef main(llm_raw_output: str) -> dict:\n    \"\"\"\n \
           \   清洗大模型输出，移除 <think>...</think> 思考过程\n    \"\"\"\n    # 如果输入为空，直接返回空\n\
@@ -316,7 +319,7 @@ workflow:
           - text
           value_type: string
           variable: llm_raw_output
-      height: 53
+      height: 52
       id: '1764490552775'
       position:
         x: 638
@@ -328,7 +331,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         answer: '{{#1764252044266.text#}}'
         desc: ''
@@ -336,7 +339,7 @@ workflow:
         title: 直接回复
         type: answer
         variables: []
-      height: 104
+      height: 103
       id: '1772693135049'
       position:
         x: 638
@@ -348,8 +351,8 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     viewport:
-      x: -146.44204609111614
-      y: -115.86274813102841
-      zoom: 1.0051869027514686
+      x: 488.96786480172733
+      y: 286.52187424676123
+      zoom: 0.4545721667280003

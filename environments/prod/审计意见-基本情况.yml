@@ -107,7 +107,7 @@ workflow:
           required: true
           type: text-input
           variable: region
-      height: 89
+      height: 88
       id: '1768890719569'
       position:
         x: 79
@@ -119,7 +119,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         context:
           enabled: false
@@ -170,7 +170,7 @@ workflow:
         variables: []
         vision:
           enabled: false
-      height: 89
+      height: 88
       id: llm
       position:
         x: 677
@@ -182,7 +182,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         answer: '{{#llm.text#}}'
         desc: ''
@@ -190,7 +190,7 @@ workflow:
         title: 直接回复
         type: answer
         variables: []
-      height: 104
+      height: 103
       id: answer
       position:
         x: 980
@@ -201,7 +201,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         desc: ''
         is_array_file: true
@@ -223,7 +223,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     viewport:
       x: 82.29580173316185
       y: 96.62428374858868

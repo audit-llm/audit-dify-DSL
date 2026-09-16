@@ -124,7 +124,7 @@ workflow:
           required: true
           type: text-input
           variable: audit_year
-      height: 115
+      height: 114
       id: '1757644973320'
       position:
         x: 409.15246903213716
@@ -136,7 +136,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         context:
           enabled: true
@@ -178,7 +178,7 @@ workflow:
         variables: []
         vision:
           enabled: false
-      height: 89
+      height: 88
       id: '17582928874110'
       position:
         x: 1341.6056338286658
@@ -190,7 +190,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         answer: '{{#17582928874110.text#}}'
         desc: ''
@@ -198,7 +198,7 @@ workflow:
         title: 直接回复
         type: answer
         variables: []
-      height: 104
+      height: 103
       id: '1763973119507'
       position:
         x: 1905.153760177821
@@ -210,7 +210,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         dataset_ids:
         - 28iyihUX7ji1oHur8J28VTUjBwMZVhxOCaDCEOL0sHiKu7CprlKliozQRviBuIga
@@ -233,7 +233,7 @@ workflow:
         selected: false
         title: 知识检索-关于自然资源生态文明建设党的会议精神
         type: knowledge-retrieval
-      height: 91
+      height: 90
       id: '1770295126105'
       position:
         x: 831.7480270034334
@@ -245,8 +245,8 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     viewport:
-      x: -932.8137557396064
-      y: 285.90163187695265
-      zoom: 1.0767823060325559
+      x: -178.2208766321894
+      y: 269.1304375242895
+      zoom: 1.055434990657295

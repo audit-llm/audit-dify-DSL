@@ -115,7 +115,7 @@ workflow:
           required: false
           type: text-input
           variable: region
-      height: 168
+      height: 193
       id: '1787000000002'
       position:
         x: 81
@@ -127,7 +127,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         context:
           enabled: true
@@ -195,7 +195,7 @@ workflow:
             - 素材缺失的维度用【待补充：×××】标注，不要杜撰数字；
 
             - 若素材含多年度对比，请按原文保留。'
-        selected: true
+        selected: false
         title: 基本情况整理
         type: llm
         variables: []
@@ -213,7 +213,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     - data:
         answer: '{{#llm.text#}}'
         desc: ''
@@ -233,8 +233,8 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 244
+      width: 243
     viewport:
-      x: 13.5
-      y: 17
+      x: 76.5
+      y: -36
       zoom: 1
